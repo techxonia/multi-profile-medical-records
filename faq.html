@@ -1,150 +1,492 @@
 <!DOCTYPE html>
-<html  >
+<html lang="en">
+
 <head>
-  <!-- Site made with Mobirise Website Builder v4.9.7, https://mobirise.com -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Mobirise v4.9.7, mobirise.com">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  
-  <title>Multi-Profile Medical Records - FAQ</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/socicon/css/socicon.min.css">
-  <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="assets/slick/slick.css">
-  <link rel="stylesheet" href="assets/unicore/css/style.css">
-  <link rel="stylesheet" href="assets/dropdown-menu/style.light.css">
-  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-  
-  
-  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+    <title>FAQ - Multi-Profile Medical Records App</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+
+    <style>
+        :root {
+            --brand: #006C52;
+            --brand-dark: #00513D;
+            --accent: #17A581;
+            --ink: #2b2f38;
+            --muted: #6b7280;
+            --bg: #f5f7fb;
+            --card: #ffffff;
+            --border: #e6e9f0;
+            --radius: 14px;
+            --shadow: 0 10px 30px rgba(20, 40, 90, .08);
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--ink);
+            background: var(--bg);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        /* ---------- Progress bar ---------- */
+        #read-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px;
+            width: 0;
+            background: linear-gradient(90deg, var(--brand), var(--accent));
+            z-index: 1000;
+            transition: width .1s linear;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+            color: #fff;
+            padding: 70px 20px 90px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -1px; left: 0; right: 0;
+            height: 60px;
+            background: var(--bg);
+            clip-path: polygon(0 100%, 100% 100%, 100% 0);
+        }
+        .hero .badge-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .15);
+            margin-bottom: 18px;
+            font-size: 30px;
+        }
+        .hero h1 {
+            font-weight: 700;
+            font-size: 2.6rem;
+            margin: 0 0 10px;
+            letter-spacing: .5px;
+        }
+        .hero p {
+            max-width: 680px;
+            margin: 0 auto;
+            opacity: .92;
+            font-weight: 300;
+            font-size: 1.15rem;
+        }
+
+        /* ---------- Layout ---------- */
+        .layout {
+            max-width: 1080px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        /* ---------- Table of contents ---------- */
+        .toc {
+            position: sticky;
+            top: 20px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 18px;
+        }
+        .toc h3 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--muted);
+            margin: 0 0 12px;
+        }
+        .toc a {
+            display: block;
+            color: var(--ink);
+            text-decoration: none;
+            font-size: 1.05rem;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border-left: 3px solid transparent;
+            transition: all .2s ease;
+        }
+        .toc a:hover { background: var(--bg); color: var(--brand); }
+        .toc a.active {
+            background: rgba(0, 108, 82, .1);
+            border-left-color: var(--brand);
+            color: var(--brand);
+            font-weight: 600;
+        }
+
+        /* ---------- Content cards ---------- */
+        .content { display: flex; flex-direction: column; gap: 20px; }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 28px 30px;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+        .card.visible { opacity: 1; transform: translateY(0); }
+
+        .card h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin: 0 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--ink);
+        }
+        .card h2 .ico {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px; height: 38px;
+            min-width: 38px;
+            border-radius: 10px;
+            background: rgba(0, 108, 82, .12);
+            color: var(--brand);
+            font-size: 16px;
+        }
+        .card p { margin: 0 0 12px; color: #4a4f5a; }
+        .card p:last-child { margin-bottom: 0; }
+        .card a { color: var(--brand); }
+
+        /* ---------- FAQ accordion ---------- */
+        .faq-item { border-top: 1px solid var(--border); padding: 0; }
+        .faq-item:first-child { border-top: none; }
+
+        .faq-q {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            font-family: inherit;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--ink);
+            padding: 18px 0;
+            cursor: pointer;
+            transition: color .2s;
+        }
+        .faq-q:hover { color: var(--brand); }
+        .faq-q .chevron {
+            margin-left: auto;
+            font-size: .85rem;
+            transition: transform .3s ease;
+            color: var(--muted);
+        }
+        .faq-q[aria-expanded="true"] .chevron { transform: rotate(180deg); color: var(--brand); }
+        .faq-q[aria-expanded="true"] { color: var(--brand); }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .35s ease, padding .35s ease;
+            padding: 0 0 0 30px;
+            color: #4a4f5a;
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+        .faq-a.open {
+            max-height: 500px;
+            padding: 0 0 18px 30px;
+        }
+
+        /* ---------- Contact ---------- */
+        .contact-line { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; color: #4a4f5a; }
+        .contact-line i { color: var(--brand); width: 20px; text-align: center; }
+
+        /* ---------- Back to top ---------- */
+        #to-top {
+            position: fixed;
+            bottom: 26px; right: 26px;
+            width: 48px; height: 48px;
+            border: none;
+            border-radius: 50%;
+            background: var(--brand);
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 108, 82, .4);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: all .3s ease;
+            z-index: 999;
+        }
+        #to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        #to-top:hover { background: var(--brand-dark); }
+
+        footer {
+            text-align: center;
+            padding: 26px 20px 40px;
+            color: var(--muted);
+            font-size: .95rem;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; }
+            .toc { display: none; }
+            .hero h1 { font-size: 1.6rem; }
+        }
+    </style>
 </head>
+
 <body>
 
+    <div id="read-progress"></div>
 
-<section class="mbr-section--bg-adapted mbr-section--relative" id="msg-box6-m" data-rv-view="42" style="background-color: rgb(255, 255, 255);">
-    <div class="elements-content accordionStyles" style="margin-top:-50px; padding-bottom: 10px;">
-        
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="section-head text-center space30">
-                        <h1 class="mbr-title-font">FAQ</h1>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div id="accordion" class="panel-group accordionStyles accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default" style="display: block;">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title mbr-title-font"><a role="button" class="" data-toggle="collapse" data-parent="#msg-box6-m" data-core="" href="#collapseOnemsg-box6-m" aria-expanded="true" aria-controls="collapseOne">Q. How to cancel subscription?</a></h4>
-                            </div>
-                            <div id="collapseOnemsg-box6-m" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body"><p> <a href="https://support.google.com/googleplay/answer/7018481?co=GENIE.Platform%3DAndroid&hl=en" target="_blank">Cancel Subscription</a> </p></div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default" style="display: block;">
-                            <div class="panel-heading" role="tab" id="headingTwo">
-                                <h4 class="panel-title mbr-title-font"><a role="button" class="" data-toggle="collapse" data-parent="#msg-box6-m" data-core="" href="#collapseTwomsg-box6-m" aria-expanded="true" aria-controls="collapseTwo">Q. Can i add unlimited data on Multi-Profile Medical Records app?</a></h4>
-                            </div>
-                          <!--  <div id="collapseTwomsg-box6-m" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                <div class="panel-body"><p>A. Yes, you can add multiple data to the Multi-Profile Medical Records app.</p></div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default" style="display: block;">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title mbr-title-font"><a role="button" class="" data-toggle="collapse" data-parent="#msg-box6-m" data-core="" href="#collapseThreemsg-box6-m" aria-expanded="true" aria-controls="collapseThree">Q. How to enable Clipboard Automatic Paste feature in Multi-Profile Medical Records App.?</a></h4>
-                            </div>
-                            <div id="collapseThreemsg-box6-m" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="panel-body"><p>A. On the Settings tab, you will see the Clipboard section. Clicking on the "Automatic Paste" button will redirect you to the Accessibility screen. Search the Multi-Profile Medical Records application and enable the service for automatic pasting feature.
-                                </br>
-                                 <a href="https://www.youtube.com/watch?v=mqT3gw4JjYA" target="_blank">Video Tutorial</a>   
-                                </p></div>
-                            </div>
-                        </div>-->
-                        <!-- <div class="panel panel-default" style="display: block;">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title mbr-title-font"><a role="button" class="" data-toggle="collapse" data-parent="#msg-box6-m" data-core="" href="#collapseFourmsg-box6-m" aria-expanded="true" aria-controls="collapseFour">Q. How responders see my information?</a></h4>
-                            </div>
-                            <div id="collapseFourmsg-box6-m" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="panel-body"><p>A. When you are in emergency situations, your near responders will clicked on floating icon/ notification present on your mobile lock screen, and will redirect to app to view your information.</p></div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default" style="display: block;">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title mbr-title-font"><a role="button" class="" data-toggle="collapse" data-parent="#msg-box6-m" data-core="" href="#collapseFivemsg-box6-m" aria-expanded="true" aria-controls="collapseFive">Q. Is there multilingual support?</a></h4>
-                            </div>
-                            <div id="collapseFivemsg-box6-m" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="panel-body"><p>A. We have currently support for Five Language:English,Nepali,Hindi ,Italian &amp; Germany. We’ll add support for more languages upon request. You can switch the default preferred language from the App Settings.</p></div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default" style="display: block;">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title mbr-title-font"><a role="button" class="collapsed" data-toggle="collapse" data-parent="#msg-box6-m" data-core="" href="#collapseSixmsg-box6-m" aria-expanded="false" aria-controls="collapseSix">Q. I want to record my voice. Can I record it?</a></h4>
-                            </div>
-                            <div id="collapseSixmsg-box6-m" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="panel-body"><p>A. Sure, you can record your voice limit to 30 sec and will be show on Profile page.</p></div>
-                            </div>
-                        </div>
-					
-						<div class="panel panel-default" style="display: block;">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title mbr-title-font"><a role="button" class="collapsed" data-toggle="collapse" data-parent="#msg-box6-m" data-core="" href="#collapseEightmsg-box6-m" aria-expanded="false" aria-controls="collapseEight">
-								Q. How to restrict the user to re-edit my data?
-								</a></h4>
-                            </div>
-                            <div id="collapseEightmsg-box6-m" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="panel-body"><p>
-								A. You can secure your app by enabling the app lock feature. Under more tab, click on APP Lock, you can enable/disable ice app lock. User can’t enter the dashboard until pin/fingerprint matches.
-								</p></div>
-                            </div>
-                        </div> --><!--
-                        <div class="panel panel-default" style="display: block;">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title mbr-title-font"><a role="button" class="collapsed" data-toggle="collapse" data-parent="#msg-box6-m" data-core="" href="#collapseSevenmsg-box6-m" aria-expanded="false" aria-controls="collapseSeVen">
-                                Q. Is there backup and restore feature?
-                                </a></h4>
-                            </div>
-                            <div id="collapseSevenmsg-box6-m" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="panel-body"><p>
-                                A. Backup & Restore feature are available for all user. You can backup and restore the file from the local drive.
-                                </p></div>
-                            </div>
-                        </div>
+    <header class="hero">
+        <div class="badge-icon"><i class="fa fa-question-circle"></i></div>
+        <h1>Frequently Asked Questions</h1>
+        <p>Answers to common questions about the Multi-Profile Medical Records app.</p>
+    </header>
 
-						<div class="panel panel-default" style="display: block;">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title mbr-title-font"><a role="button" class="collapsed" data-toggle="collapse" data-parent="#msg-box6-m" data-core="" href="#collapseNinemsg-box6-m" aria-expanded="false" aria-controls="collapseNine">
-								Q. How to unlock premium version or Ads Free App?
-								</a></h4>
-                            </div>
-                            <div id="collapseNinemsg-box6-m" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="panel-body"><p>
-								A. Open Home page, Scroll down and click upgrade to premium & you have to pay USD $8 to unlock premium version of Multi-Profile Medical Records app. 
-								</p></div>
-                            </div>-->
-                        </div>
-                    </div>
+    <div class="layout">
+
+        <!-- Sticky navigation -->
+        <nav class="toc" aria-label="Table of contents">
+            <h3>Categories</h3>
+            <a href="#general" class="active">General</a>
+            <a href="#profiles">Profiles &amp; Data</a>
+            <a href="#security">Security &amp; Privacy</a>
+            <a href="#backup">Backup &amp; Restore</a>
+            <a href="#subscription">Subscription &amp; Premium</a>
+            <a href="#contact">Still Need Help?</a>
+        </nav>
+
+        <main class="content">
+
+            <!-- General -->
+            <section class="card" id="general">
+                <h2><span class="ico"><i class="fa fa-info-circle"></i></span>General</h2>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>What is Multi-Profile Medical Records?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">It is an offline-based app that lets you manage medical records for your whole family. You can store doctor visits, medications, diseases, medical tests, surgeries, vaccines, medical insurance, doctor details, prescriptions, and attach documents &mdash; all in one secure place on your device.</div>
                 </div>
-            </div>
-        </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>Is it available on both Android and iOS?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">Yes. The app is available on the Google Play Store for Android and the Apple App Store for iPhone and iPad.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>Is an internet connection required to use the app?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">No. The app is fully offline. All your data is stored locally on your device. An internet connection is only used for ads and premium purchase verification.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>Is there multilingual support?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">Yes. The app supports multiple languages including English, German, Spanish, French, Italian, Dutch, Polish, Portuguese, and Russian. You can switch the language from Settings.</div>
+                </div>
+            </section>
+
+            <!-- Profiles & Data -->
+            <section class="card" id="profiles">
+                <h2><span class="ico"><i class="fa fa-users"></i></span>Profiles &amp; Data</h2>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>Can I add multiple family members?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">Yes. You can create unlimited profiles for yourself and every family member, each with their own medical records.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>Can I add unlimited records?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">Free users can add a limited number of records per category. Premium users can add unlimited medications, doctor visits, tests, surgeries, and any other records per profile with no restrictions.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>Can I attach photos to records?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">Yes. You can capture a photo with your camera or pick one from your gallery and attach it to any record (prescriptions, test reports, etc.).</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>How do I import a contact as a profile?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">When adding a profile, tap the contact icon in the Full Name field. The app will ask for contact permission, then let you pick a contact. The name, photo, and phone number will be filled automatically.</div>
+                </div>
+            </section>
+
+            <!-- Security & Privacy -->
+            <section class="card" id="security">
+                <h2><span class="ico"><i class="fa fa-lock"></i></span>Security &amp; Privacy</h2>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>Is my data safe?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">Absolutely. All data is stored locally on your device only. Nothing is transmitted to any server. We have no access to your information.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>How do I lock the app?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">Go to Settings &gt; App Lock. You can set a 4-digit PIN and optionally enable biometric (fingerprint / Face ID) authentication. The app will require authentication every time you open it.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>What if I forget my PIN?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">If you forget your PIN and biometric is not set up, you will need to clear the app data (which erases all records) or restore from a backup if you have one.</div>
+                </div>
+            </section>
+
+            <!-- Backup & Restore -->
+            <section class="card" id="backup">
+                <h2><span class="ico"><i class="fa fa-cloud-download"></i></span>Backup &amp; Restore</h2>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>How does backup work?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">You can create a local backup file containing all your data. This file is saved to your device storage. You can then copy it to a computer or cloud drive for safekeeping.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>How do I restore my data on a new phone?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">Transfer your backup file to the new phone, open the app, go to Settings &gt; Backup &amp; Restore, and select the file. Restoring replaces all current data in the app and resets the PIN to what it was at the time of backup.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>Can I transfer data between Android and iOS?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">Cross-platform transfer is not currently supported. Backup files are specific to the platform they were created on.</div>
+                </div>
+            </section>
+
+            <!-- Subscription & Premium -->
+            <section class="card" id="subscription">
+                <h2><span class="ico"><i class="fa fa-star"></i></span>Subscription &amp; Premium</h2>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>What does Premium include?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">Premium removes all ads, unlocks unlimited backup files, and gives you access to all current and future premium features.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>What are the pricing options?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">You can choose a yearly subscription ($9.99/year) or a one-time Lifetime purchase ($29.99). Both give you the same premium features.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>How do I cancel my subscription?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">On Android, manage your subscription in the <a href="https://support.google.com/googleplay/answer/7018481" target="_blank" rel="noopener">Google Play Store</a>. On iOS, go to Settings &gt; Apple ID &gt; Subscriptions on your device.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>Can I get a refund?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">Subscription and purchase amounts are strictly non-refundable under any condition. Please review the premium features before purchasing.</div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-q" aria-expanded="false"><span>How do I restore my purchase on a new device?</span><i class="fa fa-chevron-down chevron"></i></button>
+                    <div class="faq-a">Open the app and go to the Premium/Upgrade screen. Tap &ldquo;Restore Purchase.&rdquo; Make sure you are signed in with the same Google account (Android) or Apple ID (iOS) that you used for the original purchase. Your premium access will be restored automatically.</div>
+                </div>
+            </section>
+
+            <!-- Contact -->
+            <section class="card" id="contact">
+                <h2><span class="ico"><i class="fa fa-envelope"></i></span>Still Need Help?</h2>
+                <p>If your question isn&rsquo;t answered above, reach out to us directly.</p>
+                <p class="contact-line"><i class="fa fa-building-o"></i> <strong>Techxonia, LLC</strong></p>
+                <p class="contact-line"><i class="fa fa-map-marker"></i> 312 W 2nd Street, Casper, Wyoming, 82601, USA</p>
+                <p class="contact-line"><i class="fa fa-globe"></i> <a href="https://techxonia.com/" target="_blank" rel="noopener">https://techxonia.com/</a></p>
+                <p class="contact-line"><i class="fa fa-envelope-o"></i> <a href="mailto:support@techxonia.com">support@techxonia.com</a></p>
+                <p class="contact-line"><i class="fa fa-phone"></i> <a href="tel:+13072158081">+1 (307) 215-8081</a></p>
+            </section>
+
+        </main>
     </div>
-</section>
 
-  <script src="assets/web/assets/jquery/jquery.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/smooth-scroll/SmoothScroll.js"></script>
-  <!--[if lte IE 9]>
-    <script src="assets/jquery-placeholder/jquery.placeholder.min.js"></script>
-  <![endif]-->
-  <script src="assets/slick/slick.js"></script>
-  <script src="assets/unicore/js/script.js"></script>
-  <script src="assets/dropdown-menu/script.js"></script>
-  <script src="assets/accordionFix/jquery.accordionFix.js"></script>
-  <script src="assets/formoid/formoid.min.js"></script>
-  
-  
+    <footer>
+        &copy; 2026 Techxonia, LLC — Multi-Profile Medical Records App. All rights reserved.
+    </footer>
+
+    <button id="to-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></button>
+
+    <script>
+        (function () {
+            var progress = document.getElementById('read-progress');
+            var toTop = document.getElementById('to-top');
+            var sections = Array.prototype.slice.call(document.querySelectorAll('.content .card'));
+            var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+
+            function onScroll() {
+                var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                var scrolled = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+                progress.style.width = scrolled + '%';
+                toTop.classList.toggle('show', window.scrollY > 400);
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            // Reveal cards on scroll + highlight active TOC
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        var id = entry.target.getAttribute('id');
+                        tocLinks.forEach(function (link) {
+                            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                        });
+                    }
+                });
+            }, { rootMargin: '0px 0px -20% 0px', threshold: 0.05 });
+
+            sections.forEach(function (s) { io.observe(s); });
+
+            // Ensure last cards show when at page bottom
+            window.addEventListener('scroll', function () {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 60) {
+                    sections.forEach(function (s) { s.classList.add('visible'); });
+                    var last = sections[sections.length - 1];
+                    if (last) {
+                        var id = last.getAttribute('id');
+                        tocLinks.forEach(function (link) {
+                            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                        });
+                    }
+                }
+            }, { passive: true });
+
+            // FAQ accordion
+            document.querySelectorAll('.faq-q').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var expanded = btn.getAttribute('aria-expanded') === 'true';
+                    btn.setAttribute('aria-expanded', !expanded);
+                    btn.nextElementSibling.classList.toggle('open', !expanded);
+                });
+            });
+
+            // Back to top
+            toTop.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script>
+
 </body>
-
-
 
 </html>
