@@ -1,73 +1,341 @@
 <!DOCTYPE html>
-<html  >
+<html lang="en">
+
 <head>
-  <!-- Site made with Mobirise Website Builder v4.9.7, https://mobirise.com -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Mobirise v4.9.7, mobirise.com">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 
+    <title>Disclaimer - Multi-Profile Medical Records App</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
 
-  
-  <title>Disclaimer - Multi-Profile Medical Records App</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/socicon/css/socicon.min.css">
-  <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="assets/slick/slick.css">
-  <link rel="stylesheet" href="assets/unicore/css/style.css">
-  <link rel="stylesheet" href="assets/dropdown-menu/style.light.css">
-  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-  
-  
-  
+    <style>
+        :root {
+            --brand: #006C52;
+            --brand-dark: #00513D;
+            --accent: #17A581;
+            --ink: #2b2f38;
+            --muted: #6b7280;
+            --bg: #f5f7fb;
+            --card: #ffffff;
+            --border: #e6e9f0;
+            --radius: 14px;
+            --shadow: 0 10px 30px rgba(20, 40, 90, .08);
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--ink);
+            background: var(--bg);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        /* ---------- Progress bar ---------- */
+        #read-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px;
+            width: 0;
+            background: linear-gradient(90deg, var(--brand), var(--accent));
+            z-index: 1000;
+            transition: width .1s linear;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+            color: #fff;
+            padding: 70px 20px 90px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -1px; left: 0; right: 0;
+            height: 60px;
+            background: var(--bg);
+            clip-path: polygon(0 100%, 100% 100%, 100% 0);
+        }
+        .hero .badge-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .15);
+            margin-bottom: 18px;
+            font-size: 30px;
+        }
+        .hero h1 {
+            font-weight: 700;
+            font-size: 2.6rem;
+            margin: 0 0 10px;
+            letter-spacing: .5px;
+        }
+        .hero p {
+            max-width: 680px;
+            margin: 0 auto;
+            opacity: .92;
+            font-weight: 300;
+            font-size: 1.15rem;
+        }
+        .hero .updated {
+            display: inline-block;
+            margin-top: 16px;
+            font-size: .95rem;
+            background: rgba(255, 255, 255, .15);
+            padding: 6px 16px;
+            border-radius: 30px;
+        }
+
+        /* ---------- Layout ---------- */
+        .layout {
+            max-width: 1080px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        /* ---------- Table of contents ---------- */
+        .toc {
+            position: sticky;
+            top: 20px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 18px;
+        }
+        .toc h3 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--muted);
+            margin: 0 0 12px;
+        }
+        .toc a {
+            display: block;
+            color: var(--ink);
+            text-decoration: none;
+            font-size: 1.15rem;
+            padding: 11px 12px;
+            border-radius: 8px;
+            border-left: 3px solid transparent;
+            transition: all .2s ease;
+        }
+        .toc a:hover { background: var(--bg); color: var(--brand); }
+        .toc a.active {
+            background: rgba(0, 108, 82, .1);
+            border-left-color: var(--brand);
+            color: var(--brand);
+            font-weight: 600;
+        }
+
+        /* ---------- Content cards ---------- */
+        .content { display: flex; flex-direction: column; gap: 20px; }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 28px 30px;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+        .card.visible { opacity: 1; transform: translateY(0); }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--ink);
+        }
+        .card h2 .ico {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px; height: 38px;
+            min-width: 38px;
+            border-radius: 10px;
+            background: rgba(0, 108, 82, .12);
+            color: var(--brand);
+            font-size: 16px;
+        }
+        .card p { margin: 0 0 12px; color: #4a4f5a; }
+        .card p:last-child { margin-bottom: 0; }
+        .card a { color: var(--brand); }
+        .legal { font-size: .98rem; }
+
+        /* ---------- Note ---------- */
+        .note {
+            background: #fff8e6;
+            border-left: 4px solid #f2c94c;
+            padding: 16px 18px;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            color: #6b5b1f;
+        }
+
+        /* ---------- Back to top ---------- */
+        #to-top {
+            position: fixed;
+            bottom: 26px; right: 26px;
+            width: 48px; height: 48px;
+            border: none;
+            border-radius: 50%;
+            background: var(--brand);
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 108, 82, .4);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: all .3s ease;
+            z-index: 999;
+        }
+        #to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        #to-top:hover { background: var(--brand-dark); }
+
+        footer {
+            text-align: center;
+            padding: 26px 20px 40px;
+            color: var(--muted);
+            font-size: .95rem;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; }
+            .toc { display: none; }
+            .hero h1 { font-size: 1.6rem; }
+        }
+    </style>
 </head>
+
 <body>
- 
 
-<section class="mbr-section--bg-adapted mbr-section--relative" id="msg-box11-j" data-rv-view="9" style="background-color: rgb(255, 255, 255);">
-    <div class="article elements-content" style="margin-top:-50px; padding-bottom: 10px;">
-        
-        <div class="container">
-            <div class="row">
-                <div class="container" style="width: 100%">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4 class="text-uppercase space20 mbr-title-font">DISCLAIMER</h4>
-                            <p>Multi-Profile Medical Records app is an offline based app to keep the details of your important cards , insurance & clipboard notes  in one place securely. You can store your ID card info such as Passport, Citizenship, Driving Licensee or Debit and Credit cards, vehicle and Life insurance data & can manage your clipboard data. Data will remain on your device locally .No any single information/data will Send to the server.
-							</br></br>
-							By downloading, accessing or using Multi-Profile Medical Records Mobile App or any page of this app, you signify your assent to this disclaimer. The contents of this app, including without limitation, all data, information, text, graphics, links and other materials are provided as a convenience to our app users and are meant to be used for informational purposes only. We do not take responsibility for decisions taken by the reader based solely on the information provided in this app. 
-							</br></br>
-							We won't take any responsibility of misused of data if you share Multi-Profile Medical Records pin, share your backup file and give to root your mobile to fetch the internal device database to second person
-							</br></br>
-							The app EXPRESSLY DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED. The app makes no warranty that (1) THE APP OR THE CONTENT WILL MEET OR SATISFY YOUR REQUIREMENTS (2) THE APP SHALL HAVE NO RESPONSIBILITY FOR ANY DAMAGE TO YOUR PHONE OR TABLET OR LOSS OF DATA THAT RESULTS FROM YOUR USE OF THE APP OR ITS CONTENT.
-							</br></br>
-							YOU AGREE TO HOLD Multi-Profile Medical Records MOBILE APP,  AND EACH OF ITS OFFICERS, DIRECTORS, EMPLOYEES AND AGENTS FROM AND AGAINST ANY AND ALL CLAIMS, ACTIONS, DEMANDS, LIABILITIES, JUDGMENTS AND SETTLEMENTS, INCLUDING WITHOUT LIMITATION, FROM ANY DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, EXEMPLARY, PUNITIVE OR ANY OTHER CLAIM YOU MAY INCUR IN CONNECTION WITH YOUR USE OF THIS APP, INCLUDING, WITHOUT LIMITATION, ANY ECONOMIC HARM, LOST PROFITS, DAMAGES TO BUSINESS, DATA OR PHONE SYSTEMS, OR ANY DAMAGES RESULTING FROM RELIANCE ON ANY CONTENT OR RESULTING FROM ANY INTERRUPTIONS, WORK STOPPAGES, PHONE OR TABLET FAILURES,DELETION OF FILES, ERRORS, OMISSIONS, INACCURACIES, DEFECTS, VIRUSES, DELAYS OR MISTAKES OF ANY KIND.
-							</br></br>
-							The app may include inaccuracies and typographical errors. Changes and improvements are periodically made to the app and the information therein. We do not warrant or assume any legal liability or responsibility for the completeness, or usefulness of any information, service.
-							
-							</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div id="read-progress"></div>
+
+    <header class="hero">
+        <div class="badge-icon"><i class="fa fa-exclamation-circle"></i></div>
+        <h1>Disclaimer</h1>
+        <p>Multi-Profile Medical Records App — please read this disclaimer carefully before using the app.</p>
+        <span class="updated"><i class="fa fa-clock-o"></i> Last updated: June 2026</span>
+    </header>
+
+    <div class="layout">
+
+        <!-- Sticky navigation -->
+        <nav class="toc" aria-label="Table of contents">
+            <h3>On this page</h3>
+            <a href="#overview" class="active">About the App</a>
+            <a href="#informational">Informational Use Only</a>
+            <a href="#data-security">Your Data &amp; Security</a>
+            <a href="#warranties">No Warranties</a>
+            <a href="#liability">Limitation of Liability</a>
+            <a href="#accuracy">Accuracy of Information</a>
+        </nav>
+
+        <main class="content">
+
+            <section class="card" id="overview">
+                <h2><span class="ico"><i class="fa fa-mobile"></i></span>About the App</h2>
+                <p>Multi-Profile Medical Records is an offline-based app to keep the details of your important cards, insurance, and clipboard notes in one place securely. You can store your ID card info such as Passport, Citizenship, Driving License, or Debit and Credit cards, vehicle and life insurance data, and manage your clipboard data.</p>
+                <p>Your data remains on your device locally. No single piece of information or data is ever sent to a server.</p>
+            </section>
+
+            <section class="card" id="informational">
+                <h2><span class="ico"><i class="fa fa-info-circle"></i></span>Informational Use Only</h2>
+                <p>By downloading, accessing or using the Multi-Profile Medical Records Mobile App or any page of this app, you signify your assent to this disclaimer. The contents of this app, including without limitation all data, information, text, graphics, links and other materials, are provided as a convenience to our app users and are meant to be used for informational purposes only. We do not take responsibility for decisions taken by the reader based solely on the information provided in this app.</p>
+                <p class="note"><i class="fa fa-heartbeat"></i> The app is a personal record-keeping tool. It does not provide medical advice, diagnosis, or treatment, and is not a substitute for the advice of a qualified healthcare professional. Always consult your doctor regarding any medical condition or decision.</p>
+            </section>
+
+            <section class="card" id="data-security">
+                <h2><span class="ico"><i class="fa fa-lock"></i></span>Your Data &amp; Security</h2>
+                <p>We won't take any responsibility for the misuse of data if you share your Multi-Profile Medical Records PIN, share your backup file, or root your mobile device to allow a second person to fetch the internal device database.</p>
+            </section>
+
+            <section class="card" id="warranties">
+                <h2><span class="ico"><i class="fa fa-ban"></i></span>No Warranties</h2>
+                <p class="legal">The app EXPRESSLY DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED. The app makes no warranty that (1) THE APP OR THE CONTENT WILL MEET OR SATISFY YOUR REQUIREMENTS; (2) THE APP SHALL HAVE NO RESPONSIBILITY FOR ANY DAMAGE TO YOUR PHONE OR TABLET OR LOSS OF DATA THAT RESULTS FROM YOUR USE OF THE APP OR ITS CONTENT.</p>
+            </section>
+
+            <section class="card" id="liability">
+                <h2><span class="ico"><i class="fa fa-balance-scale"></i></span>Limitation of Liability</h2>
+                <p class="legal">YOU AGREE TO HOLD THE MULTI-PROFILE MEDICAL RECORDS MOBILE APP, AND EACH OF ITS OFFICERS, DIRECTORS, EMPLOYEES AND AGENTS, HARMLESS FROM AND AGAINST ANY AND ALL CLAIMS, ACTIONS, DEMANDS, LIABILITIES, JUDGMENTS AND SETTLEMENTS, INCLUDING WITHOUT LIMITATION ANY DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, EXEMPLARY, PUNITIVE OR ANY OTHER CLAIM YOU MAY INCUR IN CONNECTION WITH YOUR USE OF THIS APP, INCLUDING, WITHOUT LIMITATION, ANY ECONOMIC HARM, LOST PROFITS, DAMAGES TO BUSINESS, DATA OR PHONE SYSTEMS, OR ANY DAMAGES RESULTING FROM RELIANCE ON ANY CONTENT OR RESULTING FROM ANY INTERRUPTIONS, WORK STOPPAGES, PHONE OR TABLET FAILURES, DELETION OF FILES, ERRORS, OMISSIONS, INACCURACIES, DEFECTS, VIRUSES, DELAYS OR MISTAKES OF ANY KIND.</p>
+            </section>
+
+            <section class="card" id="accuracy">
+                <h2><span class="ico"><i class="fa fa-pencil-square-o"></i></span>Accuracy of Information</h2>
+                <p>The app may include inaccuracies and typographical errors. Changes and improvements are periodically made to the app and the information therein. We do not warrant or assume any legal liability or responsibility for the completeness or usefulness of any information or service.</p>
+            </section>
+
+        </main>
     </div>
-</section>
 
+    <footer>
+        &copy; 2026 Techxonia, LLC — Multi-Profile Medical Records App. All rights reserved.
+    </footer>
 
-  <script src="assets/web/assets/jquery/jquery.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/smooth-scroll/SmoothScroll.js"></script>
-  <!--[if lte IE 9]>
-    <script src="assets/jquery-placeholder/jquery.placeholder.min.js"></script>
-  <![endif]-->
-  <script src="assets/slick/slick.js"></script>
-  <script src="assets/unicore/js/script.js"></script>
-  <script src="assets/dropdown-menu/script.js"></script>
-  <script src="assets/accordionFix/jquery.accordionFix.js"></script>
-  <script src="assets/formoid/formoid.min.js"></script>
-  
-  
+    <button id="to-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></button>
+
+    <script>
+        (function () {
+            var progress = document.getElementById('read-progress');
+            var toTop = document.getElementById('to-top');
+            var sections = Array.prototype.slice.call(document.querySelectorAll('.content .card'));
+            var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+
+            function onScroll() {
+                var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                var scrolled = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+                progress.style.width = scrolled + '%';
+                toTop.classList.toggle('show', window.scrollY > 400);
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        var id = entry.target.getAttribute('id');
+                        tocLinks.forEach(function (link) {
+                            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                        });
+                    }
+                });
+            }, { rootMargin: '-20% 0px -55% 0px', threshold: 0.05 });
+
+            sections.forEach(function (s) { io.observe(s); });
+
+            toTop.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script>
+
 </body>
+
 </html>

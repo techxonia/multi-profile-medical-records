@@ -1,183 +1,397 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <!-- Site made with Mobirise Website Builder v4.9.7, https://mobirise.com -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="generator" content="Mobirise v4.9.7, mobirise.com">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 
     <title>Terms and Conditions - Multi-Profile Medical Records App</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/socicon/css/socicon.min.css">
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/slick/slick.css">
-    <link rel="stylesheet" href="assets/unicore/css/style.css">
-    <link rel="stylesheet" href="assets/dropdown-menu/style.light.css">
-    <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
 
+    <style>
+        :root {
+            --brand: #006C52;
+            --brand-dark: #00513D;
+            --accent: #17A581;
+            --ink: #2b2f38;
+            --muted: #6b7280;
+            --bg: #f5f7fb;
+            --card: #ffffff;
+            --border: #e6e9f0;
+            --radius: 14px;
+            --shadow: 0 10px 30px rgba(20, 40, 90, .08);
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--ink);
+            background: var(--bg);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        /* ---------- Progress bar ---------- */
+        #read-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px;
+            width: 0;
+            background: linear-gradient(90deg, var(--brand), var(--accent));
+            z-index: 1000;
+            transition: width .1s linear;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+            color: #fff;
+            padding: 70px 20px 90px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -1px; left: 0; right: 0;
+            height: 60px;
+            background: var(--bg);
+            clip-path: polygon(0 100%, 100% 100%, 100% 0);
+        }
+        .hero .badge-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .15);
+            margin-bottom: 18px;
+            font-size: 30px;
+        }
+        .hero h1 {
+            font-weight: 700;
+            font-size: 2.6rem;
+            margin: 0 0 10px;
+            letter-spacing: .5px;
+        }
+        .hero p {
+            max-width: 680px;
+            margin: 0 auto;
+            opacity: .92;
+            font-weight: 300;
+            font-size: 1.15rem;
+        }
+        .hero .updated {
+            display: inline-block;
+            margin-top: 16px;
+            font-size: .95rem;
+            background: rgba(255, 255, 255, .15);
+            padding: 6px 16px;
+            border-radius: 30px;
+        }
+
+        /* ---------- Layout ---------- */
+        .layout {
+            max-width: 1080px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        /* ---------- Table of contents ---------- */
+        .toc {
+            position: sticky;
+            top: 20px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 18px;
+        }
+        .toc h3 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--muted);
+            margin: 0 0 12px;
+        }
+        .toc a {
+            display: block;
+            color: var(--ink);
+            text-decoration: none;
+            font-size: 1.15rem;
+            padding: 11px 12px;
+            border-radius: 8px;
+            border-left: 3px solid transparent;
+            transition: all .2s ease;
+        }
+        .toc a:hover { background: var(--bg); color: var(--brand); }
+        .toc a.active {
+            background: rgba(0, 108, 82, .1);
+            border-left-color: var(--brand);
+            color: var(--brand);
+            font-weight: 600;
+        }
+
+        /* ---------- Content cards ---------- */
+        .content { display: flex; flex-direction: column; gap: 20px; }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 28px 30px;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+        .card.visible { opacity: 1; transform: translateY(0); }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--ink);
+        }
+        .card h2 .ico {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px; height: 38px;
+            min-width: 38px;
+            border-radius: 10px;
+            background: rgba(0, 108, 82, .12);
+            color: var(--brand);
+            font-size: 16px;
+        }
+        .card p { margin: 0 0 12px; color: #4a4f5a; }
+        .card a { color: var(--brand); }
+
+        /* ---------- Lists ---------- */
+        .doc-list { margin: 4px 0 0; padding-left: 0; list-style: none; }
+        .doc-list > li {
+            position: relative;
+            padding: 10px 0 10px 30px;
+            color: #4a4f5a;
+            border-top: 1px dashed var(--border);
+        }
+        .doc-list > li:first-child { border-top: none; }
+        .doc-list > li::before {
+            content: "\f00c";
+            font-family: 'FontAwesome';
+            position: absolute;
+            left: 0; top: 12px;
+            color: var(--brand);
+            font-size: .9rem;
+        }
+
+        /* ---------- Note ---------- */
+        .note {
+            background: #fff8e6;
+            border-left: 4px solid #f2c94c;
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            color: #6b5b1f;
+            margin-top: 12px;
+        }
+
+        /* ---------- Contact ---------- */
+        .contact-line { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; color: #4a4f5a; }
+        .contact-line i { color: var(--brand); width: 20px; text-align: center; }
+
+        /* ---------- Back to top ---------- */
+        #to-top {
+            position: fixed;
+            bottom: 26px; right: 26px;
+            width: 48px; height: 48px;
+            border: none;
+            border-radius: 50%;
+            background: var(--brand);
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 108, 82, .4);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: all .3s ease;
+            z-index: 999;
+        }
+        #to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        #to-top:hover { background: var(--brand-dark); }
+
+        footer {
+            text-align: center;
+            padding: 26px 20px 40px;
+            color: var(--muted);
+            font-size: .95rem;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; }
+            .toc { display: none; }
+            .hero h1 { font-size: 1.6rem; }
+        }
+    </style>
 </head>
 
 <body>
 
-    <section class="mbr-section--bg-adapted mbr-section--relative" id="msg-box11-j" data-rv-view="9" style="background-color: rgb(255, 255, 255);">
-        <div class="article elements-content" style="margin-top:-50px; padding-bottom: 10px;">
+    <div id="read-progress"></div>
 
-            <div class="container">
-                <div class="row">
-                    <div class="container" style="width: 100%">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 class="text-uppercase space20 mbr-title-font">Terms & Conditions</h4>
-                                <p>
-                                    By downloading, browsing, accessing or using this Multi-Profile Medical Records <b>(“Multi-Profile Medical Records Mobile Application”)</b>, you agree to be bound by these Terms and Conditions of Use. We reserve the right to amend these terms and conditions at any time. If you disagree with any of these Terms and Conditions of Use, you must immediately discontinue your access to the Multi-Profile Medical Records Mobile Application and your use of the services offered on the Multi-Profile Medical Records Mobile Application. Continued use of the Multi-Profile Medical Records Mobile Application will constitute acceptance of these Terms and Conditions of Use, as may be amended from time to time.
-                                    </br>
-                                    </br>
-                                    <b>Terms To Use</b>
-                                    <ul>
-                                        <li>
-                                            <p>
-                                                Techxonia Inc. is committed to ensuring that the app is as useful and efficient as possible. For that reason, we reserve the right to make changes to the app or to charge for its services, at any time and for any reason. We will never charge you for the app or its services without making it very clear to you exactly what you’re paying for</p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                                The Multi-Profile Medical Records app stores and processes personal data that you have provided to us, in order to provide my Service. It’s your responsibility to keep your phone and access to the app secure. We therefore recommend that you do not jailbreak or root your phone, which is the process of removing software restrictions and limitations imposed by the official operating system of your device. It could make your phone vulnerable to malware/viruses/malicious programs, compromise your phone’s security features and it could mean that the Multi-Profile Medical Records app won’t work properly or at all.
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                                Techxonia Inc. cannot always take responsibility for the way you use the app i.e. You need to make sure that your device stays charged – if it runs out of battery and you can’t turn it on to avail the Service, Techxonia Inc. cannot accept responsibility.
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                                At some point, we may wish to update the app. The app is currently available on Android– the requirements for system (and for any additional systems we decide to extend the availability of the app to) may change, and you’ll need to download the updates if you want to keep using the app. Techxonia Inc. does not promise that it will always update the app so that it is relevant to you and/or works with the Android version that you have installed on your device. However, you promise to always accept updates to the application when offered to you, We may also wish to stop providing the app, and may terminate use of it at any time without giving notice of termination to you.
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                                We strongly recommend that you only download the Multi-Profile Medical Records mobile applications from The Play Store. Doing so will ensure that your apps are legitimate and safe from malicious software.
-                                            </p>
-                                        </li>
-                                    </ul>
-                                    </br>
-                                    </br>
+    <header class="hero">
+        <div class="badge-icon"><i class="fa fa-file-text-o"></i></div>
+        <h1>Terms &amp; Conditions</h1>
+        <p>Multi-Profile Medical Records App — please read these terms carefully before downloading, accessing, or using the app.</p>
+        <span class="updated"><i class="fa fa-clock-o"></i> Last updated: June 2026</span>
+    </header>
 
-                                    <b>Disclaimer And Exclusion Of Liability</b>
-                                    <ul>
-                                        <li>
-                                            <p>
-                                                The Multi-Profile Medical Records Mobile Application, the Services, the information on the Multi-Profile Medical Records Mobile Application and use of all related facilities are provided on an "as is, as available" basis without any warranties whether express or implied.</p>
-                                        </li>
-                                        <li>
-                                            <p> To the fullest extent permitted by applicable law, we disclaim all representations and warranties relating to the Multi-Profile Medical Records Mobile Application and its contents, including in relation to any inaccuracies or omissions in the Multi-Profile Medical Records Mobile Application, warranties of merchantability, quality, fitness for a particular purpose, accuracy, availability, non-infringement or implied warranties from course of dealing or usage of trade. </p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                                We do not warrant that the Multi-Profile Medical Records Mobile Application will always be accessible, uninterrupted, timely, secure, error free or free from computer virus or other invasive or damaging code or that the Multi-Profile Medical Records Mobile Application will not be affected by any acts of God or other force majeure events, including inability to obtain or shortage of necessary materials, equipment facilities, power or telecommunications, lack of telecommunications equipment or facilities and failure of information technology or telecommunications equipment or facilities.
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                                While we may use reasonable efforts to include accurate and up-to-date information on the Multi-Profile Medical Records Mobile Application, we make no warranties or representations as to its accuracy, timeliness or completeness.
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                                We shall not be liable for any acts or omissions of any third parties howsoever caused, and for any direct, indirect, incidental, special, consequential or punitive damages, howsoever caused, resulting from or in connection with the Multi-Profile Medical Records Mobile Application and the services offered in the Multi-Profile Medical Records Mobile Application, your access to, use of or inability to use the Multi-Profile Medical Records Mobile Application or the services offered in the Multi-Profile Medical Records Mobile Application, reliance on or downloading from the Multi-Profile Medical Records Mobile Application and/or services, or any delays, inaccuracies in the information or in its transmission including but not limited to damages for loss of business or profits, use, data or other intangible, even if we have been advised of the possibility of such damages.
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                                We shall not be liable in contract, tort (including negligence or breach of statutory duty) or otherwise howsoever and whatever the cause thereof, for any indirect, consequential, collateral, special or incidental loss or damage suffered or incurred by you in connection with the Multi-Profile Medical Records Mobile Application and these Terms and Conditions of Use. For the purposes of these Terms and Conditions of Use, indirect or consequential loss or damage includes, without limitation, loss of revenue, profits, anticipated savings or business, loss of data or goodwill, loss of use or value of any equipment including software, claims of third parties, and all associated and incidental costs and expenses.
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                                The above exclusions and limitations apply only to the extent permitted by law. None of your statutory rights as a consumer that cannot be excluded or limited are affected.
-                                            </p>
-                                        </li>
-                                    </ul>
-                                    </br>
-                                    </br>
-                                    <b>
-								Subscription Policy
-								</b>
-                                    </br>
-                                    </br>
-                                    We offer premium subscription in our Multi-Profile Medical Records App which enhances app to include more features. You can purchase the subscription inside app at just $10 for Lifetime.
-                                    </br>
-                                    </br>
-                                    Please make sure, the subscription amount is strictly non-refundable in any condition.
-                                    </br>
-                                    </br>
+    <div class="layout">
 
-                                    <b>
-Intellectual Property Rights
-</b>
-                                    </br>
-                                    </br>
-                                    <ul>
-                                        <li>
-                                            <p>
-                                                All editorial content, information, photographs, illustrations, artwork and other graphic materials, and names, logos and trade marks on the Multi-Profile Medical Records Mobile Application are protected by copyright laws and/or other laws and/or international treaties, and belong to us and/or our suppliers, as the case may be. These works, logos, graphics, sounds or images may not be copied, reproduced, retransmitted, distributed, disseminated, sold, published, broadcasted or circulated whether in whole or in part, unless expressly permitted by us and/or our suppliers, as the case may be.</p>
-                                        </li>
-                                        <li>
-                                            <p> Nothing contained on the Multi-Profile Medical Records Mobile Application should be construed as granting by implication, estoppel, or otherwise, any license or right to use any trademark displayed on the Multi-Profile Medical Records Mobile Application without our written permission. Misuse of any trademarks or any other content displayed on the Multi-Profile Medical Records Mobile Application is prohibited. </p>
-                                        </li>
-                                        <li>
-                                            <p> We will not hesitate to take legal action against any unauthorised usage of our trade marks, name or symbols to preserve and protect its rights in the matter. All rights not expressly granted herein are reserved. Other product and company names mentioned herein may also be the trade marks of their respective owners.
-                                            </p>
-                                        </li>
+        <!-- Sticky navigation -->
+        <nav class="toc" aria-label="Table of contents">
+            <h3>On this page</h3>
+            <a href="#acceptance" class="active">Acceptance</a>
+            <a href="#terms-use">Terms To Use</a>
+            <a href="#disclaimer">Disclaimer &amp; Liability</a>
+            <a href="#subscription">Subscription Policy</a>
+            <a href="#ip">Intellectual Property</a>
+            <a href="#copyright">Copyright Infringements</a>
+            <a href="#changes">Changes to These Terms</a>
+            <a href="#contact">Contact</a>
+        </nav>
 
-                                    </ul>
-                                    </br>
-                                    </br>
-                                    <b>
-								Copyright Infringements
-								</b>
-                                    </br>
-                                    </br>
-                                    We respect the intellectual property rights of others. If you believe that any material available on or through the App infringes upon any copyright you own or control, please immediately notify us using the contact information provided below (a “Notification”). A copy of your Notification will be sent to the person who posted or stored the material addressed in the Notification. Please be advised that pursuant to federal law you may be held liable for damages if you make material misrepresentations in a Notification. Thus, if you are not sure that material located on or linked to by the App infringes your copyright, you should consider first contacting an attorney.
-                                    </br>
-                                    </br><b>
-								Changes to This Terms and Conditions
-								</b>
-                                    </br>
-                                    </br>
-                                    I may update our Terms and Conditions from time to time. Thus, you are advised to review this page periodically for any changes. I will notify you of any changes by posting the new Terms and Conditions on this page. These changes are effective immediately after they are posted on this page.
-                                    </br>
-                                    </br>
-                                    <b>
-								Changes to This Terms and Conditions
-								</b>
-                                    </br>
-                                    </br>
-                                    If you have any questions, do not hesitate to contact me at techxonia@gmail.com.
-                                    </br>
-                                    </br>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <main class="content">
 
-    <script src="assets/web/assets/jquery/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/smooth-scroll/SmoothScroll.js"></script>
-    <!--[if lte IE 9]>
-    <script src="assets/jquery-placeholder/jquery.placeholder.min.js"></script>
-  <![endif]-->
-    <script src="assets/slick/slick.js"></script>
-    <script src="assets/unicore/js/script.js"></script>
-    <script src="assets/dropdown-menu/script.js"></script>
-    <script src="assets/accordionFix/jquery.accordionFix.js"></script>
-    <script src="assets/formoid/formoid.min.js"></script>
+            <section class="card" id="acceptance">
+                <h2><span class="ico"><i class="fa fa-check-circle"></i></span>Acceptance of Terms</h2>
+                <p>By downloading, browsing, accessing or using this Multi-Profile Medical Records <strong>(&ldquo;Multi-Profile Medical Records Mobile Application&rdquo;)</strong>, you agree to be bound by these Terms and Conditions of Use. We reserve the right to amend these terms and conditions at any time.</p>
+                <p>If you disagree with any of these Terms and Conditions of Use, you must immediately discontinue your access to the Multi-Profile Medical Records Mobile Application and your use of the services offered on it. Continued use of the application will constitute acceptance of these Terms and Conditions of Use, as may be amended from time to time.</p>
+            </section>
+
+            <section class="card" id="terms-use">
+                <h2><span class="ico"><i class="fa fa-list-ul"></i></span>Terms To Use</h2>
+                <ul class="doc-list">
+                    <li>Techxonia, LLC is committed to ensuring that the app is as useful and efficient as possible. For that reason, we reserve the right to make changes to the app or to charge for its services, at any time and for any reason. We will never charge you for the app or its services without making it very clear to you exactly what you&rsquo;re paying for.</li>
+                    <li>The Multi-Profile Medical Records app stores and processes personal data that you have provided to us, in order to provide our Service. It&rsquo;s your responsibility to keep your phone and access to the app secure. We therefore recommend that you do not jailbreak or root your phone, which is the process of removing software restrictions and limitations imposed by the official operating system of your device. It could make your phone vulnerable to malware/viruses/malicious programs, compromise your phone&rsquo;s security features and it could mean that the app won&rsquo;t work properly or at all.</li>
+                    <li>Techxonia, LLC cannot always take responsibility for the way you use the app i.e. you need to make sure that your device stays charged &ndash; if it runs out of battery and you can&rsquo;t turn it on to avail the Service, Techxonia, LLC cannot accept responsibility.</li>
+                    <li>At some point, we may wish to update the app. The requirements for the system (and for any additional systems we decide to extend the availability of the app to) may change, and you&rsquo;ll need to download the updates if you want to keep using the app. Techxonia, LLC does not promise that it will always update the app so that it is relevant to you and/or works with the platform version that you have installed on your device. However, you promise to always accept updates to the application when offered to you. We may also wish to stop providing the app, and may terminate use of it at any time without giving notice of termination to you.</li>
+                    <li>We strongly recommend that you only download the Multi-Profile Medical Records mobile application from the official app stores. Doing so will ensure that your apps are legitimate and safe from malicious software.</li>
+                </ul>
+            </section>
+
+            <section class="card" id="disclaimer">
+                <h2><span class="ico"><i class="fa fa-exclamation-triangle"></i></span>Disclaimer &amp; Exclusion of Liability</h2>
+                <ul class="doc-list">
+                    <li>The Multi-Profile Medical Records Mobile Application, the Services, the information on it and use of all related facilities are provided on an &ldquo;as is, as available&rdquo; basis without any warranties whether express or implied.</li>
+                    <li>To the fullest extent permitted by applicable law, we disclaim all representations and warranties relating to the application and its contents, including in relation to any inaccuracies or omissions, warranties of merchantability, quality, fitness for a particular purpose, accuracy, availability, non-infringement or implied warranties from course of dealing or usage of trade.</li>
+                    <li>We do not warrant that the application will always be accessible, uninterrupted, timely, secure, error free or free from computer virus or other invasive or damaging code, or that it will not be affected by any acts of God or other force majeure events, including inability to obtain or shortage of necessary materials, equipment, facilities, power or telecommunications.</li>
+                    <li>While we may use reasonable efforts to include accurate and up-to-date information on the application, we make no warranties or representations as to its accuracy, timeliness or completeness.</li>
+                    <li>We shall not be liable for any acts or omissions of any third parties howsoever caused, and for any direct, indirect, incidental, special, consequential or punitive damages, howsoever caused, resulting from or in connection with the application and the services offered, your access to, use of or inability to use it, reliance on or downloading from it, or any delays or inaccuracies in the information or its transmission, including but not limited to damages for loss of business or profits, use, data or other intangibles, even if we have been advised of the possibility of such damages.</li>
+                    <li>We shall not be liable in contract, tort (including negligence or breach of statutory duty) or otherwise for any indirect, consequential, collateral, special or incidental loss or damage suffered or incurred by you in connection with the application and these Terms and Conditions of Use. Indirect or consequential loss or damage includes, without limitation, loss of revenue, profits, anticipated savings or business, loss of data or goodwill, loss of use or value of any equipment including software, claims of third parties, and all associated and incidental costs and expenses.</li>
+                    <li>The above exclusions and limitations apply only to the extent permitted by law. None of your statutory rights as a consumer that cannot be excluded or limited are affected.</li>
+                </ul>
+            </section>
+
+            <section class="card" id="subscription">
+                <h2><span class="ico"><i class="fa fa-credit-card"></i></span>Subscription Policy</h2>
+                <p>We offer a premium subscription in our Multi-Profile Medical Records App which enhances the app to include more features. You can purchase the subscription inside the app &mdash; a yearly plan or a one-time Lifetime purchase.</p>
+                <p class="note"><i class="fa fa-exclamation-circle"></i> Please note: subscription and purchase amounts are strictly non-refundable under any condition.</p>
+            </section>
+
+            <section class="card" id="ip">
+                <h2><span class="ico"><i class="fa fa-copyright"></i></span>Intellectual Property Rights</h2>
+                <ul class="doc-list">
+                    <li>All editorial content, information, photographs, illustrations, artwork and other graphic materials, and names, logos and trademarks on the application are protected by copyright laws and/or other laws and/or international treaties, and belong to us and/or our suppliers, as the case may be. These works, logos, graphics, sounds or images may not be copied, reproduced, retransmitted, distributed, disseminated, sold, published, broadcast or circulated whether in whole or in part, unless expressly permitted by us and/or our suppliers.</li>
+                    <li>Nothing contained on the application should be construed as granting by implication, estoppel, or otherwise, any license or right to use any trademark displayed without our written permission. Misuse of any trademarks or any other content displayed on the application is prohibited.</li>
+                    <li>We will not hesitate to take legal action against any unauthorised usage of our trademarks, name or symbols to preserve and protect its rights in the matter. All rights not expressly granted herein are reserved. Other product and company names mentioned herein may also be the trademarks of their respective owners.</li>
+                </ul>
+            </section>
+
+            <section class="card" id="copyright">
+                <h2><span class="ico"><i class="fa fa-gavel"></i></span>Copyright Infringements</h2>
+                <p>We respect the intellectual property rights of others. If you believe that any material available on or through the App infringes upon any copyright you own or control, please immediately notify us using the contact information provided below (a &ldquo;Notification&rdquo;). A copy of your Notification will be sent to the person who posted or stored the material addressed in the Notification.</p>
+                <p>Please be advised that pursuant to federal law you may be held liable for damages if you make material misrepresentations in a Notification. Thus, if you are not sure that material located on or linked to by the App infringes your copyright, you should consider first contacting an attorney.</p>
+            </section>
+
+            <section class="card" id="changes">
+                <h2><span class="ico"><i class="fa fa-refresh"></i></span>Changes to These Terms and Conditions</h2>
+                <p>We may update our Terms and Conditions from time to time. Thus, you are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Terms and Conditions on this page. These changes are effective immediately after they are posted on this page.</p>
+            </section>
+
+            <section class="card" id="contact">
+                <h2><span class="ico"><i class="fa fa-envelope"></i></span>Contact</h2>
+                <p>If you have any questions about these Terms and Conditions, do not hesitate to contact us.</p>
+                <p class="contact-line"><i class="fa fa-building-o"></i> <strong>Techxonia, LLC</strong></p>
+                <p class="contact-line"><i class="fa fa-map-marker"></i> 312 W 2nd Street, Casper, Wyoming, 82601, USA</p>
+                <p class="contact-line"><i class="fa fa-globe"></i> <a href="https://techxonia.com/" target="_blank" rel="noopener">https://techxonia.com/</a></p>
+                <p class="contact-line"><i class="fa fa-envelope-o"></i> <a href="mailto:support@techxonia.com">support@techxonia.com</a></p>
+                <p class="contact-line"><i class="fa fa-phone"></i> <a href="tel:+13072158081">+1 (307) 215-8081</a></p>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        &copy; 2026 Techxonia, LLC — Multi-Profile Medical Records App. All rights reserved.
+    </footer>
+
+    <button id="to-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></button>
+
+    <script>
+        (function () {
+            var progress = document.getElementById('read-progress');
+            var toTop = document.getElementById('to-top');
+            var sections = Array.prototype.slice.call(document.querySelectorAll('.content .card'));
+            var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+
+            function onScroll() {
+                var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                var scrolled = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+                progress.style.width = scrolled + '%';
+                toTop.classList.toggle('show', window.scrollY > 400);
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        var id = entry.target.getAttribute('id');
+                        tocLinks.forEach(function (link) {
+                            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                        });
+                    }
+                });
+            }, { rootMargin: '-20% 0px -55% 0px', threshold: 0.05 });
+
+            sections.forEach(function (s) { io.observe(s); });
+
+            toTop.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script>
 
 </body>
 

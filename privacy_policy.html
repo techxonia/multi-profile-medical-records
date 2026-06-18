@@ -1,209 +1,507 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <!-- Site made with Mobirise Website Builder v4.9.7, https://mobirise.com -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="generator" content="Mobirise v4.9.7, mobirise.com">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-
 
     <title>Privacy Policy - Multi-Profile Medical Records App</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/socicon/css/socicon.min.css">
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/slick/slick.css">
-    <link rel="stylesheet" href="assets/unicore/css/style.css">
-    <link rel="stylesheet" href="assets/dropdown-menu/style.light.css">
-    <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
 
+    <style>
+        :root {
+            --brand: #006C52;
+            --brand-dark: #00513D;
+            --accent: #17A581;
+            --ink: #2b2f38;
+            --muted: #6b7280;
+            --bg: #f5f7fb;
+            --card: #ffffff;
+            --border: #e6e9f0;
+            --radius: 14px;
+            --shadow: 0 10px 30px rgba(20, 40, 90, .08);
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--ink);
+            background: var(--bg);
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        /* ---------- Progress bar ---------- */
+        #read-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px;
+            width: 0;
+            background: linear-gradient(90deg, var(--brand), var(--accent));
+            z-index: 1000;
+            transition: width .1s linear;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+            color: #fff;
+            padding: 70px 20px 90px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -1px; left: 0; right: 0;
+            height: 60px;
+            background: var(--bg);
+            clip-path: polygon(0 100%, 100% 100%, 100% 0);
+        }
+        .hero .badge-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .15);
+            margin-bottom: 18px;
+            font-size: 30px;
+        }
+        .hero h1 {
+            font-weight: 700;
+            font-size: 2.6rem;
+            margin: 0 0 10px;
+            letter-spacing: .5px;
+        }
+        .hero p {
+            max-width: 680px;
+            margin: 0 auto;
+            opacity: .92;
+            font-weight: 300;
+            font-size: 1.15rem;
+        }
+        .hero .updated {
+            display: inline-block;
+            margin-top: 16px;
+            font-size: .95rem;
+            background: rgba(255, 255, 255, .15);
+            padding: 6px 16px;
+            border-radius: 30px;
+        }
+
+        /* ---------- Layout ---------- */
+        .layout {
+            max-width: 1080px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        /* ---------- Table of contents ---------- */
+        .toc {
+            position: sticky;
+            top: 20px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 18px;
+        }
+        .toc h3 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--muted);
+            margin: 0 0 12px;
+        }
+        .toc a {
+            display: block;
+            color: var(--ink);
+            text-decoration: none;
+            font-size: 1.15rem;
+            padding: 11px 12px;
+            border-radius: 8px;
+            border-left: 3px solid transparent;
+            transition: all .2s ease;
+        }
+        .toc a:hover { background: var(--bg); color: var(--brand); }
+        .toc a.active {
+            background: rgba(0, 108, 82, .1);
+            border-left-color: var(--brand);
+            color: var(--brand);
+            font-weight: 600;
+        }
+
+        /* ---------- Content cards ---------- */
+        .content { display: flex; flex-direction: column; gap: 20px; }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 28px 30px;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+        .card.visible { opacity: 1; transform: translateY(0); }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--ink);
+        }
+        .card h2 .ico {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px; height: 38px;
+            min-width: 38px;
+            border-radius: 10px;
+            background: rgba(0, 108, 82, .12);
+            color: var(--brand);
+            font-size: 16px;
+        }
+        .card p { margin: 0 0 12px; color: #4a4f5a; }
+        .card a { color: var(--brand); }
+
+        .pill-list { list-style: none; padding: 0; margin: 8px 0 0; }
+        .pill-list > li {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+        }
+        .pill-list > li strong { color: var(--ink); }
+        .pill-list .sub { list-style: none; padding: 10px 0 0; margin: 0; }
+        .pill-list .sub li { padding: 6px 0; border-top: 1px dashed var(--border); }
+
+        .perm-platform {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 26px 0 4px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--brand);
+        }
+        .perm-platform i { font-size: 1.3rem; }
+
+        .note {
+            background: #fff8e6;
+            border-left: 4px solid #f2c94c;
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-size: 1.15rem;
+            color: #6b5b1f;
+        }
+
+        /* ---------- Pricing ---------- */
+        .pricing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+        .plan {
+            position: relative;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 26px 22px;
+            text-align: center;
+            transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+            background: var(--card);
+        }
+        .plan:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 34px rgba(20, 40, 90, .14);
+            border-color: var(--brand);
+        }
+        .plan.featured { border-color: var(--brand); }
+        .plan .tag {
+            position: absolute;
+            top: -13px; left: 50%;
+            transform: translateX(-50%);
+            background: var(--brand);
+            color: #fff;
+            font-size: .8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+        .plan .plan-name {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+        .plan .price {
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: var(--ink);
+            line-height: 1;
+        }
+        .plan .price small {
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: var(--muted);
+        }
+        .plan .plan-desc {
+            margin-top: 12px;
+            font-size: 1.15rem;
+            color: var(--muted);
+        }
+
+        /* ---------- Back to top ---------- */
+        #to-top {
+            position: fixed;
+            bottom: 26px; right: 26px;
+            width: 48px; height: 48px;
+            border: none;
+            border-radius: 50%;
+            background: var(--brand);
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 108, 82, .4);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: all .3s ease;
+            z-index: 999;
+        }
+        #to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        #to-top:hover { background: var(--brand-dark); }
+
+        footer {
+            text-align: center;
+            padding: 26px 20px 40px;
+            color: var(--muted);
+            font-size: .95rem;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; }
+            .toc { display: none; }
+            .hero h1 { font-size: 1.6rem; }
+        }
+    </style>
 </head>
 
 <body>
 
-    <section class="mbr-section--bg-adapted mbr-section--relative" id="msg-box11-j" data-rv-view="9" style="background-color: rgb(255, 255, 255);">
-        <div class="article elements-content" style="margin-top:-50px; padding-bottom: 10px;">
+    <div id="read-progress"></div>
 
-            <div class="container">
-                <div class="row">
-                    <div class="container" style="width: 100%">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h4 class="text-uppercase space20 mbr-title-font">Privacy Policy – Multi-Profile Medical Records App</h4>
-                                <p>
-                                   Please read our Privacy Policy carefully as it explains the following:
-								   </br></br>
-In order to use the App, you must first acknowledge and agree to our Privacy Policy. You cannot use the App without first accepting our Privacy Policy.
+    <header class="hero">
+        <div class="badge-icon"><i class="fa fa-shield"></i></div>
+        <h1>Privacy Policy</h1>
+        <p>Multi-Profile Medical Records App — your data stays on your device, private and secure. Here is exactly how we handle everything.</p>
+        <span class="updated"><i class="fa fa-clock-o"></i> Last updated: June 2026</span>
+    </header>
 
-                                    </br>
-                                    </br>
-                                    <b>
-								General
-								</b>
-                                    </br>
-                                    </br>
-                                   Techxonia Inc. provides the Multi-Profile Medical Records Application, which is an offline based app to keep the details of your important cards , insurance & clipboard notes  in one place securely. You can store your ID card info such as Passport, Citizenship, Driving Licensee or Debit and Credit cards, vehicle and Life insurance data & can manage your clipboard data.
-                                    </br>
-                                    </br>
-									Techxonia Inc. ("Techxonia Inc.", "we", "us") recognizes and understands the importance of the privacy of its users ("users", "You") and wants to respect their desire to store and access personal information in a private and secure manner. This Privacy Policy applies to our Application and describes how Techxonia Inc. manages, stores and utilizes your Personal Data through its Products.
-									</br>
-									</br>
-									In order to use our app, we require you to consent to the collection and processing of your Personal Data before you start using the app. If you do not agree with the terms of this Privacy Policy, you may not use in any manner the app.
-									</br>
-									</br>
-									Techxonia Inc. is committed to protecting the privacy of all of its users Personal Data and providing a secure, user-controlled environment for the use of the app in accordance with the Privacy Act of 8 December 1992.
-									
-									 </br>
-                                    </br>
-                                    <b>Permission Use</b>
-                                    <ul>
-                                        <li>
-                                            <p>
-                                                WRITE_EXTERNAL_STORAGE & READ_EXTERNAL_STORAGE: To fetch the image from gallery & save temporary image to drive before saving it to local database and save backup file in local storage.</p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                               	CAMERA , Autofocus : To capture the image with autofocus feature
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                               	INTERNET : For ads, remote config
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                               	VIBRATE : Vibrate if user input wrong pin code
-                                            </p>
-                                        </li>
-                                        <li>
-                                            <p>
-                                               	BILLING : For In - App purchase
-                                            </p>
-                                        </li><li>
-                                            <p>
-                                               	USE_BIOMETRIC : For Fingerprint
-                                            </p>
-                                        </li>
-										</br></br>
-										<p>Link to privacy policy of third party service providers used by the app</p>
-										<li>
-                                            <p>
-                                               	Google Play Services
-                                            </p>
-                                        </li><li>
-                                            <p>
-                                               	AdMob
-                                            </p>
-                                        </li>
-										
-										<li>
-                                            <p>
-                                               	Firebase Analytics : We won’t take any information from the Multi-Profile Medical Records App. Basic Analytics Such as 
-												
-												</br></br>
-												<ol>
-												<li>
-													<p>
-<b>													Crashlytics : </b>Track the bugs of the app. 
-													</p>
-												</li>
-												
-												<li>
-													<p>
-													<b>	Active & New User(Install Rate and Monthly active User) : </b>Default feature Provided by Firebase  (Based on Unique Mobile Device)
-													</p>
-												</li>
-												
-												<li>
-													<p>
-													<b>	Firebase Remote Config : </b>Save default data, and Admob Adunit (Reference : <a href="https://firebase.google.com/docs/remote-config">https://firebase.google.com/docs/remote-config)</a>
-													</p>
-												</li>
-												<ol>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                    </br>
-                                    </br>
-									
-									<b>Log Data</b>
-									</br></br>
-									I want to inform you that whenever you use my Service, in a case of an error in the app I collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing my Service, the time and date of your use of the Service, and other statistics.
-									
-									</br>
-									</br>
-									<b>Your Personal Data</b>
-									</br></br>
-									Techxonia Inc. doesn’t use any data. Multi-Profile Medical Records is an offline app. Any user can access the app directly, there is no any registration. All Data will remain on user device locally. No any single information/data will send to the anywhere. 
-									
-									</br>
-									</br>
-									<b>Security</b>
-									</br></br>
-									Multi-Profile Medical Records need a Pin to set for Local Authentication. That’s because no any other person won't see your data. 
-									</br></br>
-									We have Integrate latest encryption technology on Multi-Profile Medical Records App. Your data will be safe and secure in your authentic mobile device. 
-									</br></br>
-									We won't take any responsibility of misused of data if you share Multi-Profile Medical Records pin, share your backup file and give to root your mobile to fetch the internal device database to second person.
-									
-									
-									</br>
-									</br>
-								
-									<b>Cookies</b>
-									</br></br>
-									Cookies are small files which are stored on a user's computer/mobile. They are designed to hold a modest amount of data specific to a particular client and website/app.
-									</br></br>
-									But here in our Multi-Profile Medical Records App, we do not address anyone cookies. It deletes immediately from our servers. 
-									
-									</br>
-									</br>
-								
-									<b>Subscription Policy</b>
-									</br></br>
-									We offer premium subscription in our Multi-Profile Medical Records App which enhances app to include more features. You can purchase the subscription inside app at just $10 for Lifetime.
-									</br></br>
-									Please make sure, the subscription amount is strictly non-refundable in any condition. 
-									
-									</br>
-									</br>
-								
-									<b>Updates or changes to our Privacy Policy</b>
-									</br></br>
-								Occasionally, we may change or update this Privacy Policy to allow us to use or share your previously collected Personal Data for other purposes. If Techxonia Inc. would use your Personal  Data in a manner materially different from that stated at the time of the collection, we will provide you with a notice on our Website and in our Multi-Profile Medical Records Mobile Application indicating that the Privacy Policy has been changed or updated and request you to agree with the updated or changed Privacy Policy.
-									</br></br>
-									
-									<b>Controller</b>
-									</br></br>
-								Techxonia Inc.
-									</br></br>
-									techxonia@gmail.com
-									
-									
-									
-                                </p>
-                            </div>
-                        </div>
+    <div class="layout">
+
+        <!-- Sticky navigation -->
+        <nav class="toc" aria-label="Table of contents">
+            <h3>On this page</h3>
+            <a href="#general" class="active">General</a>
+            <a href="#permissions">Permission Use</a>
+            <a href="#log-data">Log Data</a>
+            <a href="#personal-data">Your Personal Data</a>
+            <a href="#security">Security</a>
+            <a href="#cookies">Cookies</a>
+            <a href="#subscription">Subscription &amp; Pricing</a>
+            <a href="#changes">Policy Updates</a>
+            <a href="#controller">Contact</a>
+        </nav>
+
+        <main class="content">
+
+            <section class="card" id="general">
+                <h2><span class="ico"><i class="fa fa-info"></i></span>General</h2>
+                <p>Please read this Privacy Policy carefully. In order to use the App, you must first acknowledge and agree to it. You cannot use the App without first accepting our Privacy Policy.</p>
+                <p>Techxonia, LLC provides the Multi-Profile Medical Records Application, an offline based app that keeps your important cards, insurance details and clipboard notes in one place securely. You can store ID info such as Passport, Citizenship, Driving License, Debit and Credit cards, vehicle and life insurance data, and manage your clipboard data.</p>
+                <p>Techxonia, LLC ("Techxonia", "we", "us") recognizes the importance of your privacy and respects your desire to store and access personal information in a private and secure manner. This Privacy Policy describes how we manage, store and utilize your Personal Data through our Products.</p>
+                <p>To use our app, we require you to consent to the collection and processing of your Personal Data before you start using it. If you do not agree with the terms of this Privacy Policy, you may not use the app in any manner.</p>
+                <p>We are committed to protecting the privacy of all users' Personal Data and providing a secure, user-controlled environment in accordance with the Privacy Act of 8 December 1992.</p>
+            </section>
+
+            <section class="card" id="permissions">
+                <h2><span class="ico"><i class="fa fa-lock"></i></span>Permission Use</h2>
+                <p>The App requests only the permissions it needs to provide its features. The exact set differs slightly between Android and iOS, as listed below. Many of these are optional and are only requested when you use the related feature.</p>
+
+                <h3 class="perm-platform"><i class="fa fa-android"></i> Android</h3>
+                <ul class="pill-list">
+                    <li><strong>Camera &amp; Autofocus:</strong> Capture photos of medical documents, reports, and cards (autofocus for clearer scans).</li>
+                    <li><strong>Storage (read, Android 12 and below):</strong> Pick images from your gallery and save a temporary image before storing it in the local database and backups. On Android 13+ the system photo picker is used, so no storage permission is required.</li>
+                    <li><strong>Internet &amp; Network State:</strong> Load ads, fetch remote config, and check connectivity.</li>
+                    <li><strong>Contacts (read):</strong> Optionally import contact details (such as a doctor or emergency contact) when you choose to. Used only on request.</li>
+                    <li><strong>Notifications:</strong> Show medication and appointment reminders and other local alerts.</li>
+                    <li><strong>Exact Alarms &amp; Full-Screen Alerts:</strong> Trigger medication reminders at the exact scheduled time and show full-screen alarm alerts.</li>
+                    <li><strong>Receive Boot Completed:</strong> Reschedule your reminders after the device restarts so you don't miss them.</li>
+                    <li><strong>Vibrate &amp; Wake Lock:</strong> Vibrate for alarms or a wrong PIN entry and keep the screen awake while an alarm is showing.</li>
+                    <li><strong>Billing:</strong> Process in-app purchases and subscriptions.</li>
+                    <li><strong>Biometric / Fingerprint:</strong> Unlock the app with fingerprint or face authentication when app lock is enabled.</li>
+                </ul>
+
+                <h3 class="perm-platform"><i class="fa fa-apple"></i> iOS (iPhone &amp; iPad)</h3>
+                <ul class="pill-list">
+                    <li><strong>Camera:</strong> Capture photos of medical documents and reports.</li>
+                    <li><strong>Photo Library:</strong> Attach images of medical documents and reports from your photos.</li>
+                    <li><strong>Notifications:</strong> Show medication and appointment reminders and other local alerts.</li>
+                    <li><strong>In-App Purchases:</strong> Process subscriptions and the lifetime purchase through the App Store.</li>
+                    <li><strong>Keychain:</strong> Securely store app identifiers used for your purchases and entitlements on your device.</li>
+                </ul>
+
+                <ul class="pill-list">
+                    <li>
+                        <strong>Third-party services used by the app:</strong>
+                        <ul class="sub">
+                            <li>Google Play Services (Android)</li>
+                            <li>AdMob</li>
+                            <li>
+                                <strong>Firebase Analytics</strong> — we don't take any personal information from the app. Only basic analytics:
+                                <ul class="sub">
+                                    <li><strong>Crashlytics:</strong> Track app bugs.</li>
+                                    <li><strong>Active &amp; New Users:</strong> Install rate and monthly active users, a default Firebase feature based on a unique mobile device.</li>
+                                    <li><strong>Firebase Remote Config:</strong> Save default data and the AdMob ad unit (<a href="https://firebase.google.com/docs/remote-config" target="_blank" rel="noopener">reference</a>).</li>
+                                </ul>
+                            </li>
+                            <li><strong>RevenueCat</strong> — manages subscriptions and in-app purchases across platforms.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="card" id="log-data">
+                <h2><span class="ico"><i class="fa fa-file-text-o"></i></span>Log Data</h2>
+                <p>Whenever you use the Service, in the case of an error in the app we collect data and information (through third-party products) on your phone called Log Data. This may include your device's IP address, device name, operating system version, app configuration when using the Service, the time and date of use, and other statistics.</p>
+            </section>
+
+            <section class="card" id="personal-data">
+                <h2><span class="ico"><i class="fa fa-user-secret"></i></span>Your Personal Data</h2>
+                <p>Techxonia, LLC doesn't use any of your data. Multi-Profile Medical Records is an offline app. Any user can access the app directly with no registration required. All data remains on your device locally. No single piece of information or data is ever sent anywhere.</p>
+            </section>
+
+            <section class="card" id="security">
+                <h2><span class="ico"><i class="fa fa-shield"></i></span>Security</h2>
+                <p>Multi-Profile Medical Records requires a PIN for local authentication, so no one else can see your data.</p>
+                <p>We have integrated the latest encryption technology in the app. Your data stays safe and secure on your authentic mobile device.</p>
+                <p>We take no responsibility for misuse of data if you share your PIN, share your backup file, or root your device to allow a second person to access the internal database.</p>
+            </section>
+
+            <section class="card" id="cookies">
+                <h2><span class="ico"><i class="fa fa-info-circle"></i></span>Cookies</h2>
+                <p>Cookies are small files stored on a user's computer or mobile device, designed to hold a modest amount of data specific to a particular client and website or app.</p>
+                <p>In our Multi-Profile Medical Records App we do not use any cookies. They are deleted immediately from our servers.</p>
+            </section>
+
+            <section class="card" id="subscription">
+                <h2><span class="ico"><i class="fa fa-star"></i></span>Subscription &amp; Pricing</h2>
+                <p>We offer a premium subscription that unlocks additional features in the Multi-Profile Medical Records App. Choose the plan that fits you best — both can be purchased securely inside the app.</p>
+
+                <div class="pricing">
+                    <div class="plan">
+                        <div class="plan-name">Yearly</div>
+                        <div class="price">$9.99<small>/year</small></div>
+                        <p class="plan-desc">Full premium access, billed once a year. Great for trying everything out.</p>
+                    </div>
+                    <div class="plan featured">
+                        <span class="tag">Best Value</span>
+                        <div class="plan-name">Lifetime</div>
+                        <div class="price">$29.99<small> once</small></div>
+                        <p class="plan-desc">Pay once, own it forever. All premium features with no recurring charges.</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <script src="assets/web/assets/jquery/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/smooth-scroll/SmoothScroll.js"></script>
-    <!--[if lte IE 9]>
-    <script src="assets/jquery-placeholder/jquery.placeholder.min.js"></script>
-  <![endif]-->
-    <script src="assets/slick/slick.js"></script>
-    <script src="assets/unicore/js/script.js"></script>
-    <script src="assets/dropdown-menu/script.js"></script>
-    <script src="assets/accordionFix/jquery.accordionFix.js"></script>
-    <script src="assets/formoid/formoid.min.js"></script>
+                <p class="note" style="margin-top:18px;"><i class="fa fa-exclamation-circle"></i> Please note: subscription and purchase amounts are strictly non-refundable under any condition.</p>
+            </section>
+
+            <section class="card" id="changes">
+                <h2><span class="ico"><i class="fa fa-refresh"></i></span>Updates to this Policy</h2>
+                <p>Occasionally we may change or update this Privacy Policy to allow us to use or share previously collected Personal Data for other purposes. If we ever use your Personal Data in a manner materially different from what was stated at the time of collection, we will post a notice on our website and within the app indicating the policy has changed, and request your agreement with the updated policy.</p>
+            </section>
+
+            <section class="card" id="controller">
+                <h2><span class="ico"><i class="fa fa-envelope"></i></span>Controller &amp; Contact</h2>
+                <p><strong>Techxonia, LLC</strong></p>
+                <p>312 W 2nd Street, Casper, Wyoming, 82601, USA</p>
+                <p>Website: <a href="https://techxonia.com/" target="_blank" rel="noopener">https://techxonia.com/</a></p>
+                <p>Support: <a href="mailto:support@techxonia.com">support@techxonia.com</a></p>
+                <p>Phone: <a href="tel:+13072158081">+1 (307) 215-8081</a></p>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        &copy; 2026 Techxonia, LLC — Multi-Profile Medical Records App. All rights reserved.
+    </footer>
+
+    <button id="to-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></button>
+
+    <script>
+        (function () {
+            // Reading progress bar
+            var progress = document.getElementById('read-progress');
+            var toTop = document.getElementById('to-top');
+            var sections = Array.prototype.slice.call(document.querySelectorAll('.content .card'));
+            var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+
+            function onScroll() {
+                var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                var scrolled = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+                progress.style.width = scrolled + '%';
+                toTop.classList.toggle('show', window.scrollY > 400);
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            // Reveal cards on scroll + highlight active TOC link
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        var id = entry.target.getAttribute('id');
+                        tocLinks.forEach(function (link) {
+                            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                        });
+                    }
+                });
+            }, { rootMargin: '-20% 0px -55% 0px', threshold: 0.05 });
+
+            sections.forEach(function (s) { io.observe(s); });
+
+            // Back to top
+            toTop.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script>
 
 </body>
 

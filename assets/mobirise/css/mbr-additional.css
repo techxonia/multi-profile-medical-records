@@ -3,8 +3,8 @@
 
 
 .btn.btn-primary {
-  background-color: #29d9c2;
-  border-color: #29d9c2;
+  background-color: #006C52;
+  border-color: #006C52;
 }
 .btn.btn-primary:hover,
 .btn.btn-primary:focus,
@@ -63,7 +63,7 @@
   border-color: #f63709;
 }
 .text-primary {
-  color: #29d9c2 !important;
+  color: #006C52 !important;
 }
 .text-info {
   color: #27aae0 !important;
@@ -78,7 +78,7 @@
   color: #f97352 !important;
 }
 a {
-  color: #29d9c2;
+  color: #006C52;
 }
 a:hover,
 a:focus,
@@ -93,7 +93,7 @@ a.active {
 .extFooter1 ul li:before,
 .mbr-gallery-filter li:hover,
 .extFooter1 ul li a:hover {
-  color: #29d9c2 !important;
+  color: #006C52 !important;
 }
 .navbar-nav > li > a:hover,
 .dropdown1-menu > li > a:hover,
@@ -105,38 +105,38 @@ a.active {
 .dropdown-menu a:hover,
 .nav-tabs > li.active > a,
 .content8 .nav-tabs > li.active > a {
-  color: #29d9c2 !important;
+  color: #006C52 !important;
 }
 .cta-wrap.bg-dark .cta-btn.btn-default:hover,
 .cta-wrap .cta-btn.btn-default:hover,
 .mbr-primary-bgColor,
 .nav-tabs > li > a::after,
 .services-s5 .service-content:hover i {
-  background: #29d9c2 !important;
+  background: #006C52 !important;
 }
 blockquote {
-  border-left-color: #29d9c2;
+  border-left-color: #006C52;
 }
 .process-step2 .btn-circle:hover,
 .process-step2 .btn-info,
 .mbr-slider .carousel-control:hover {
-  background: #29d9c2 !important;
-  border-color: #29d9c2 !important;
+  background: #006C52 !important;
+  border-color: #006C52 !important;
 }
 .services-s5 .service-content:hover i:after,
 .cta-wrap.bg-dark .cta-btn:hover,
 .cta-wrap.bg-primary .cta-btn:hover,
 .nav-link.btn.btn-primary:hover {
-  border-color: #29d9c2;
+  border-color: #006C52;
 }
 .mbr-gallery-filter li.active {
-  color: #29d9c2;
-  border-color: #29d9c2;
+  color: #006C52;
+  border-color: #006C52;
 }
 .cta-wrap .cta-btn.btn-default:hover,
 .cta-wrap.bg-dark .cta-btn.btn-default:hover {
-  background: #29d9c2;
-  border-color: #29d9c2;
+  background: #006C52;
+  border-color: #006C52;
 }
 .mbr-title-font,
 .mbr-gallery-filter li {
