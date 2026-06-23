@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 
-    <title>Disclaimer - Multi-Profile Medical Records App</title>
+    <title>Restore Purchases - Multi-Profile Medical Records App</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
@@ -181,19 +181,74 @@
             color: var(--brand);
             font-size: 16px;
         }
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 22px 0 10px;
+            color: var(--brand-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
         .card p { margin: 0 0 12px; color: #4a4f5a; }
-        .card p:last-child { margin-bottom: 0; }
         .card a { color: var(--brand); }
+
+        /* ---------- Numbered steps ---------- */
+        .steps { margin: 4px 0 0; padding-left: 0; list-style: none; counter-reset: step; }
+        .steps > li {
+            position: relative;
+            padding: 8px 0 8px 44px;
+            color: #4a4f5a;
+            min-height: 40px;
+        }
+        .steps > li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0; top: 8px;
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            background: rgba(0, 108, 82, .12);
+            color: var(--brand);
+            font-weight: 700;
+            font-size: .95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ---------- Check lists ---------- */
+        .doc-list { margin: 4px 0 0; padding-left: 0; list-style: none; }
+        .doc-list > li {
+            position: relative;
+            padding: 10px 0 10px 30px;
+            color: #4a4f5a;
+            border-top: 1px dashed var(--border);
+        }
+        .doc-list > li:first-child { border-top: none; }
+        .doc-list > li::before {
+            content: "\f00c";
+            font-family: 'FontAwesome';
+            position: absolute;
+            left: 0; top: 12px;
+            color: var(--brand);
+            font-size: .9rem;
+        }
 
         /* ---------- Note ---------- */
         .note {
             background: #fff8e6;
             border-left: 4px solid #f2c94c;
-            padding: 16px 18px;
+            padding: 14px 18px;
             border-radius: 8px;
             font-size: 1.05rem;
             color: #6b5b1f;
+            margin-top: 12px;
         }
+
+        /* ---------- Contact ---------- */
+        .contact-line { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; color: #4a4f5a; }
+        .contact-line i { color: var(--brand); width: 20px; text-align: center; }
 
         /* ---------- Back to top ---------- */
         #to-top {
@@ -237,9 +292,9 @@
     <div id="read-progress"></div>
 
     <header class="hero">
-        <div class="badge-icon"><i class="fa fa-exclamation-circle"></i></div>
-        <h1>Disclaimer</h1>
-        <p>Multi-Profile Medical Records App — please read this disclaimer carefully before using the app.</p>
+        <div class="badge-icon"><i class="fa fa-refresh"></i></div>
+        <h1>Restore Purchases</h1>
+        <p>Multi-Profile Medical Records App — restore your Premium access on a new device, after reinstalling, or when your purchase isn&rsquo;t showing.</p>
         <span class="updated"><i class="fa fa-clock-o"></i> Last updated: June 2026</span>
     </header>
 
@@ -248,46 +303,89 @@
         <!-- Sticky navigation -->
         <nav class="toc" aria-label="Table of contents">
             <h3>On this page</h3>
-            <a href="#overview" class="active">About the App</a>
-            <a href="#informational">Informational Use Only</a>
-            <a href="#data-security">Your Data &amp; Security</a>
-            <a href="#warranties">No Warranties</a>
-            <a href="#liability">Limitation of Liability</a>
-            <a href="#accuracy">Accuracy of Information</a>
+            <a href="#overview" class="active">Overview</a>
+            <a href="#ios">iOS (Apple App Store)</a>
+            <a href="#android">Android (Google Play)</a>
+            <a href="#troubleshooting">Troubleshooting</a>
+            <a href="#contact">Contact</a>
         </nav>
 
         <main class="content">
 
             <section class="card" id="overview">
-                <h2><span class="ico"><i class="fa fa-mobile"></i></span>About the App</h2>
-                <p>Multi-Profile Medical Records is an offline-based app that lets you securely keep the medical records of your whole family in one place. You can create multiple profiles (family members) and store doctor visits, medications, diseases, medical tests, surgeries, vaccines, medical insurance, doctor details, prescriptions, and attached documents.</p>
-                <p>Your data remains on your device locally. No single piece of information or data is ever sent to a server.</p>
+                <h2><span class="ico"><i class="fa fa-info-circle"></i></span>Overview</h2>
+                <p>If you previously bought Premium &mdash; either the <strong>auto-renewable yearly subscription</strong> or the <strong>one-time Lifetime</strong> purchase &mdash; you can restore it for free at any time. Use <strong>Restore Purchases</strong> when:</p>
+                <ul class="doc-list">
+                    <li>You installed the app on a new phone or tablet.</li>
+                    <li>You deleted and reinstalled the app.</li>
+                    <li>Your Premium features are not showing even though you already paid.</li>
+                </ul>
+                <p class="note"><i class="fa fa-exclamation-circle"></i> Restoring is free and never charges you again. You must be signed in with the <strong>same store account</strong> (Apple ID or Google account) you used for the original purchase.</p>
             </section>
 
-            <section class="card" id="informational">
-                <h2><span class="ico"><i class="fa fa-info-circle"></i></span>Informational Use Only</h2>
-                <p>By downloading, accessing or using the Multi-Profile Medical Records Mobile App or any page of this app, you signify your assent to this disclaimer. The contents of this app, including without limitation all data, information, text, graphics, links and other materials, are provided as a convenience to our app users and are meant to be used for informational purposes only. We do not take responsibility for decisions taken by the reader based solely on the information provided in this app.</p>
-                <p class="note"><i class="fa fa-heartbeat"></i> The app is a personal record-keeping tool. It does not provide medical advice, diagnosis, or treatment, and is not a substitute for the advice of a qualified healthcare professional. Always consult your doctor regarding any medical condition or decision.</p>
+            <section class="card" id="ios">
+                <h2><span class="ico"><i class="fa fa-apple"></i></span>iOS (Apple App Store)</h2>
+                <p>Sign in to your device with the same <strong>Apple ID</strong> used for the original purchase, then open the app.</p>
+
+                <h3><i class="fa fa-star"></i> Restore a Lifetime purchase</h3>
+                <ol class="steps">
+                    <li>Open the Multi-Profile Medical Records app.</li>
+                    <li>Go to <strong>Settings</strong> (or the <strong>Premium / Upgrade</strong> screen).</li>
+                    <li>Tap <strong>Restore Purchases</strong>.</li>
+                    <li>Wait for the confirmation &mdash; your Lifetime Premium unlocks automatically.</li>
+                </ol>
+
+                <h3><i class="fa fa-repeat"></i> Restore a Subscription</h3>
+                <ol class="steps">
+                    <li>Open the app and tap <strong>Restore Purchases</strong> on the Premium / Upgrade screen.</li>
+                    <li>Your active yearly subscription is detected and Premium is re-enabled.</li>
+                    <li>To review or manage the subscription, open <strong>Settings</strong> app &rarr; tap your name &rarr; <strong>Subscriptions</strong>.</li>
+                </ol>
+                <p class="note"><i class="fa fa-exclamation-circle"></i> An expired or canceled subscription cannot be restored &mdash; you would need to subscribe again. Only an active subscription is restored.</p>
             </section>
 
-            <section class="card" id="data-security">
-                <h2><span class="ico"><i class="fa fa-lock"></i></span>Your Data &amp; Security</h2>
-                <p>We won't take any responsibility for the misuse of data if you share your Multi-Profile Medical Records PIN, share your backup file, or root your mobile device to allow a second person to fetch the internal device database.</p>
+            <section class="card" id="android">
+                <h2><span class="ico"><i class="fa fa-android"></i></span>Android (Google Play)</h2>
+                <p>Sign in to your device with the same <strong>Google account</strong> used for the original purchase, then open the app.</p>
+
+                <h3><i class="fa fa-star"></i> Restore a Lifetime purchase</h3>
+                <ol class="steps">
+                    <li>Open the Multi-Profile Medical Records app.</li>
+                    <li>Go to <strong>Settings</strong> (or the <strong>Premium / Upgrade</strong> screen).</li>
+                    <li>Tap <strong>Restore Purchases</strong>.</li>
+                    <li>Your one-time Lifetime Premium is detected and unlocked.</li>
+                </ol>
+
+                <h3><i class="fa fa-repeat"></i> Restore a Subscription</h3>
+                <ol class="steps">
+                    <li>Open the app and tap <strong>Restore Purchases</strong> on the Premium / Upgrade screen.</li>
+                    <li>Your active yearly subscription is detected and Premium is re-enabled.</li>
+                    <li>To review or manage the subscription, open the <strong>Google Play Store</strong> &rarr; profile icon &rarr; <strong>Payments &amp; subscriptions</strong> &rarr; <strong>Subscriptions</strong>.</li>
+                </ol>
+                <p class="note"><i class="fa fa-exclamation-circle"></i> An expired or canceled subscription cannot be restored &mdash; you would need to subscribe again. Only an active subscription is restored.</p>
             </section>
 
-            <section class="card" id="warranties">
-                <h2><span class="ico"><i class="fa fa-ban"></i></span>No Warranties</h2>
-                <p>The app EXPRESSLY DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED. The app makes no warranty that (1) THE APP OR THE CONTENT WILL MEET OR SATISFY YOUR REQUIREMENTS; (2) THE APP SHALL HAVE NO RESPONSIBILITY FOR ANY DAMAGE TO YOUR PHONE OR TABLET OR LOSS OF DATA THAT RESULTS FROM YOUR USE OF THE APP OR ITS CONTENT.</p>
+            <section class="card" id="troubleshooting">
+                <h2><span class="ico"><i class="fa fa-wrench"></i></span>Troubleshooting</h2>
+                <p>If your purchase still doesn&rsquo;t restore, check the following:</p>
+                <ul class="doc-list">
+                    <li><strong>Correct account:</strong> confirm you&rsquo;re signed in with the exact Apple ID / Google account used to buy Premium.</li>
+                    <li><strong>Internet connection:</strong> restoring requires a working connection to verify the purchase with the store.</li>
+                    <li><strong>Update the app:</strong> install the latest version from the App Store or Google Play, then try again.</li>
+                    <li><strong>Restart:</strong> fully close and reopen the app (or restart your device) and tap Restore Purchases again.</li>
+                    <li><strong>Subscription status:</strong> verify the subscription is still active in your store account &mdash; expired/canceled plans cannot be restored.</li>
+                    <li><strong>Still stuck?</strong> contact us with your store order/receipt ID and we&rsquo;ll help.</li>
+                </ul>
             </section>
 
-            <section class="card" id="liability">
-                <h2><span class="ico"><i class="fa fa-balance-scale"></i></span>Limitation of Liability</h2>
-                <p>YOU AGREE TO HOLD THE MULTI-PROFILE MEDICAL RECORDS MOBILE APP, AND EACH OF ITS OFFICERS, DIRECTORS, EMPLOYEES AND AGENTS, HARMLESS FROM AND AGAINST ANY AND ALL CLAIMS, ACTIONS, DEMANDS, LIABILITIES, JUDGMENTS AND SETTLEMENTS, INCLUDING WITHOUT LIMITATION ANY DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, EXEMPLARY, PUNITIVE OR ANY OTHER CLAIM YOU MAY INCUR IN CONNECTION WITH YOUR USE OF THIS APP, INCLUDING, WITHOUT LIMITATION, ANY ECONOMIC HARM, LOST PROFITS, DAMAGES TO BUSINESS, DATA OR PHONE SYSTEMS, OR ANY DAMAGES RESULTING FROM RELIANCE ON ANY CONTENT OR RESULTING FROM ANY INTERRUPTIONS, WORK STOPPAGES, PHONE OR TABLET FAILURES, DELETION OF FILES, ERRORS, OMISSIONS, INACCURACIES, DEFECTS, VIRUSES, DELAYS OR MISTAKES OF ANY KIND.</p>
-            </section>
-
-            <section class="card" id="accuracy">
-                <h2><span class="ico"><i class="fa fa-pencil-square-o"></i></span>Accuracy of Information</h2>
-                <p>The app may include inaccuracies and typographical errors. Changes and improvements are periodically made to the app and the information therein. We do not warrant or assume any legal liability or responsibility for the completeness or usefulness of any information or service.</p>
+            <section class="card" id="contact">
+                <h2><span class="ico"><i class="fa fa-envelope"></i></span>Contact</h2>
+                <p>Need help restoring your purchase? Reach out and include your store order ID if possible.</p>
+                <p class="contact-line"><i class="fa fa-building-o"></i> <strong>Techxonia, LLC</strong></p>
+                <p class="contact-line"><i class="fa fa-map-marker"></i> 312 W 2nd Street, Casper, Wyoming, 82601, USA</p>
+                <p class="contact-line"><i class="fa fa-globe"></i> <a href="https://techxonia.com/" target="_blank" rel="noopener">https://techxonia.com/</a></p>
+                <p class="contact-line"><i class="fa fa-envelope-o"></i> <a href="mailto:support@techxonia.com">support@techxonia.com</a></p>
+                <p class="contact-line"><i class="fa fa-phone"></i> <a href="tel:+13072158081">+1 (307) 215-8081</a></p>
             </section>
 
         </main>
