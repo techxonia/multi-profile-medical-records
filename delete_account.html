@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+
+    <title>Delete Your Data - Multi-Profile Medical Records App</title>
+    <meta name="description" content="Learn how to permanently delete your data from the Multi-Profile Medical Records app. All medical records and profiles are stored locally on your device — no online account exists.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://techxonia.github.io/multi-profile-medical-records/delete_account.html">
+
+    <!-- Open Graph / SEO -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Delete Your Data - Multi-Profile Medical Records App">
+    <meta property="og:description" content="How to permanently remove your locally stored data from the Multi-Profile Medical Records app.">
+    <meta property="og:url" content="https://techxonia.github.io/multi-profile-medical-records/delete_account.html">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+
+    <style>
+        :root {
+            --brand: #1f9d6b;
+            --brand-dark: #157a52;
+            --accent: #43c08c;
+            --ink: #243027;
+            --muted: #6b7280;
+            --bg: #f1f8f4;
+            --card: #ffffff;
+            --border: #e1ede6;
+            --radius: 16px;
+            --shadow: 0 12px 34px rgba(31, 157, 107, .12);
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--ink);
+            background: var(--bg);
+            line-height: 1.8;
+            font-size: 20px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ---------- Progress bar ---------- */
+        #read-progress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 4px;
+            width: 0;
+            background: linear-gradient(90deg, var(--brand), var(--accent));
+            z-index: 1000;
+            transition: width .1s linear;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+            color: #fff;
+            padding: 70px 20px 90px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -1px; left: 0; right: 0;
+            height: 60px;
+            background: var(--bg);
+            clip-path: polygon(0 100%, 100% 100%, 100% 0);
+        }
+        .hero .badge-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 76px; height: 76px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .15);
+            margin-bottom: 18px;
+            font-size: 32px;
+        }
+        .hero h1 {
+            font-weight: 700;
+            font-size: 3rem;
+            margin: 0 0 12px;
+            letter-spacing: .5px;
+        }
+        .hero p {
+            max-width: 720px;
+            margin: 0 auto;
+            opacity: .94;
+            font-weight: 300;
+            font-size: 1.3rem;
+        }
+        .hero .updated {
+            display: inline-block;
+            margin-top: 16px;
+            font-size: 1.05rem;
+            background: rgba(255, 255, 255, .15);
+            padding: 6px 16px;
+            border-radius: 30px;
+        }
+
+        /* ---------- Layout ---------- */
+        .layout {
+            max-width: 1080px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+
+        /* ---------- Table of contents ---------- */
+        .toc {
+            position: sticky;
+            top: 20px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 18px;
+        }
+        .toc h3 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--muted);
+            margin: 0 0 12px;
+        }
+        .toc a {
+            display: block;
+            color: var(--ink);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 11px 12px;
+            border-radius: 8px;
+            border-left: 3px solid transparent;
+            transition: all .2s ease;
+        }
+        .toc a:hover { background: var(--bg); color: var(--brand); }
+        .toc a.active {
+            background: rgba(31, 157, 107, .1);
+            border-left-color: var(--brand);
+            color: var(--brand);
+            font-weight: 600;
+        }
+
+        /* ---------- Content cards ---------- */
+        .content { display: flex; flex-direction: column; gap: 20px; }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 28px 30px;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .6s ease, transform .6s ease;
+        }
+        .card.visible { opacity: 1; transform: translateY(0); }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--ink);
+        }
+        .card h2 .ico {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px; height: 38px;
+            min-width: 38px;
+            border-radius: 10px;
+            background: rgba(31, 157, 107, .12);
+            color: var(--brand);
+            font-size: 16px;
+        }
+        .card p { margin: 0 0 12px; color: #45524a; }
+        .card a { color: var(--brand); }
+
+        /* ---------- Check lists ---------- */
+        .doc-list { margin: 4px 0 0; padding-left: 0; list-style: none; }
+        .doc-list > li {
+            position: relative;
+            padding: 10px 0 10px 30px;
+            color: #45524a;
+            border-top: 1px dashed var(--border);
+        }
+        .doc-list > li:first-child { border-top: none; }
+        .doc-list > li::before {
+            content: "\f00c";
+            font-family: 'FontAwesome';
+            position: absolute;
+            left: 0; top: 12px;
+            color: var(--brand);
+            font-size: .9rem;
+        }
+
+        /* ---------- Step cards ---------- */
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 6px;
+        }
+        .step {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 18px;
+            position: relative;
+        }
+        .step .num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            background: var(--brand);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 12px;
+        }
+        .step h4 {
+            margin: 0 0 6px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+        }
+        .step p { margin: 0; font-size: .98rem; color: #56625a; }
+
+        /* ---------- Result banner ---------- */
+        .result {
+            background: rgba(31, 157, 107, .1);
+            border-left: 4px solid var(--brand);
+            padding: 16px 20px;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            color: var(--brand-dark);
+            margin-top: 20px;
+        }
+        .result strong { color: var(--brand-dark); }
+
+        /* ---------- Note ---------- */
+        .note {
+            background: #fff8e6;
+            border-left: 4px solid #f2c94c;
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-size: 1.02rem;
+            color: #6b5b1f;
+            margin-top: 12px;
+        }
+
+        /* ---------- FAQ ---------- */
+        .faq-item { border-top: 1px solid var(--border); padding: 18px 0; }
+        .faq-item:first-of-type { border-top: none; padding-top: 4px; }
+        .faq-item h4 {
+            margin: 0 0 8px;
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        .faq-item h4 i { color: var(--brand); margin-top: 4px; }
+        .faq-item p { margin: 0; padding-left: 26px; }
+
+        /* ---------- Contact ---------- */
+        .contact-line { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; color: #45524a; }
+        .contact-line i { color: var(--brand); width: 20px; text-align: center; }
+
+        /* ---------- Back to top ---------- */
+        #to-top {
+            position: fixed;
+            bottom: 26px; right: 26px;
+            width: 48px; height: 48px;
+            border: none;
+            border-radius: 50%;
+            background: var(--brand);
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(31, 157, 107, .4);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: all .3s ease;
+            z-index: 999;
+        }
+        #to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+        #to-top:hover { background: var(--brand-dark); }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px 44px;
+            color: var(--muted);
+            font-size: .95rem;
+        }
+        footer .links { margin-bottom: 12px; }
+        footer .links a {
+            color: var(--brand);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer .links a:hover { text-decoration: underline; }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; }
+            .toc { display: none; }
+            .hero h1 { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="read-progress"></div>
+
+    <header class="hero">
+        <div class="badge-icon"><i class="fa fa-trash-o"></i></div>
+        <h1>Delete Your Data</h1>
+        <p>Multi-Profile Medical Records stores all of your information <strong>locally on your device</strong>. There is no online account &mdash; you are always in full control of your data and can permanently remove it at any time.</p>
+        <span class="updated"><i class="fa fa-clock-o"></i> Last updated: June 2026</span>
+    </header>
+
+    <div class="layout">
+
+        <!-- Sticky navigation -->
+        <nav class="toc" aria-label="Table of contents">
+            <h3>On this page</h3>
+            <a href="#how-it-works" class="active">How It Works</a>
+            <a href="#steps">Steps to Delete</a>
+            <a href="#alternative">Alternative Method</a>
+            <a href="#privacy">Privacy Commitment</a>
+            <a href="#faq">FAQ</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <main class="content">
+
+            <section class="card" id="how-it-works">
+                <h2><span class="ico"><i class="fa fa-info-circle"></i></span>How Data Removal Works</h2>
+                <p>Multi-Profile Medical Records is a fully <strong>offline application</strong>. We want to be completely clear about what that means for your data:</p>
+                <ul class="doc-list">
+                    <li>The app <strong>does not create or maintain online accounts</strong> &mdash; there is no registration, login, or cloud account to delete.</li>
+                    <li>All of your medical records and profiles are stored <strong>exclusively on your device</strong>.</li>
+                    <li>Because nothing is kept on our servers, <strong>deleting your data is done directly within the app</strong> &mdash; instantly and entirely under your control.</li>
+                </ul>
+            </section>
+
+            <section class="card" id="steps">
+                <h2><span class="ico"><i class="fa fa-list-ol"></i></span>Steps to Delete Your Data</h2>
+                <p>Follow these steps inside the app to permanently remove everything stored on your device:</p>
+                <div class="step-grid">
+                    <div class="step">
+                        <span class="num">1</span>
+                        <h4>Open the App</h4>
+                        <p>Launch Multi-Profile Medical Records on your device.</p>
+                    </div>
+                    <div class="step">
+                        <span class="num">2</span>
+                        <h4>Go to More</h4>
+                        <p>Navigate to the <strong>More</strong> section.</p>
+                    </div>
+                    <div class="step">
+                        <span class="num">3</span>
+                        <h4>Scroll Down</h4>
+                        <p>Scroll to the bottom of the screen.</p>
+                    </div>
+                    <div class="step">
+                        <span class="num">4</span>
+                        <h4>Tap Delete</h4>
+                        <p>Tap <strong>&ldquo;Delete All Data &amp; Reset App&rdquo;</strong> (shown as <strong>Log Out</strong> in some versions).</p>
+                    </div>
+                    <div class="step">
+                        <span class="num">5</span>
+                        <h4>Confirm</h4>
+                        <p>Confirm the deletion when prompted.</p>
+                    </div>
+                </div>
+                <p class="result"><i class="fa fa-check-circle"></i> <strong>Result:</strong> All profiles, medical records, reminders, and locally stored information are <strong>permanently removed from your device</strong>.</p>
+            </section>
+
+            <section class="card" id="alternative">
+                <h2><span class="ico"><i class="fa fa-mobile"></i></span>Alternative Method</h2>
+                <p>Prefer to remove everything at once? You can also simply <strong>uninstall the application</strong>:</p>
+                <ul class="doc-list">
+                    <li>Uninstalling the app removes all locally stored data from your device.</li>
+                    <li>No further action is required &mdash; because <strong>no server-side account exists</strong>, there is nothing left to delete elsewhere.</li>
+                </ul>
+                <p class="note"><i class="fa fa-exclamation-circle"></i> Deletion is permanent. If you want to keep a copy of your records, export or back them up <strong>before</strong> deleting or uninstalling the app.</p>
+            </section>
+
+            <section class="card" id="privacy">
+                <h2><span class="ico"><i class="fa fa-shield"></i></span>Our Privacy Commitment</h2>
+                <p>Your privacy is at the core of how this app is built:</p>
+                <ul class="doc-list">
+                    <li>Your medical records remain <strong>on your device</strong>.</li>
+                    <li>We <strong>do not sell</strong> your data.</li>
+                    <li>We <strong>do not maintain cloud copies</strong> of your medical records.</li>
+                    <li>We <strong>do not share</strong> your health information.</li>
+                </ul>
+            </section>
+
+            <section class="card" id="faq">
+                <h2><span class="ico"><i class="fa fa-question-circle"></i></span>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h4><i class="fa fa-angle-right"></i> Can I delete my account?</h4>
+                    <p>Multi-Profile Medical Records does not create online accounts. All information is stored locally on your device.</p>
+                </div>
+                <div class="faq-item">
+                    <h4><i class="fa fa-angle-right"></i> How do I permanently remove my data?</h4>
+                    <p>Use the <strong>Delete All Data</strong> option within the app, or uninstall the application.</p>
+                </div>
+                <div class="faq-item">
+                    <h4><i class="fa fa-angle-right"></i> Do you keep copies of my medical records?</h4>
+                    <p>No. Medical records remain on your device unless you manually export or back them up.</p>
+                </div>
+                <div class="faq-item">
+                    <h4><i class="fa fa-angle-right"></i> How long does deletion take?</h4>
+                    <p>Deletion occurs immediately on your device.</p>
+                </div>
+            </section>
+
+            <section class="card" id="contact">
+                <h2><span class="ico"><i class="fa fa-envelope"></i></span>Contact</h2>
+                <p>Have questions about deleting your data? We&rsquo;re here to help.</p>
+                <p class="contact-line"><i class="fa fa-building-o"></i> <strong>Techxonia, LLC</strong></p>
+                <p class="contact-line"><i class="fa fa-globe"></i> <a href="https://techxonia.com/" target="_blank" rel="noopener">https://techxonia.com/</a></p>
+                <p class="contact-line"><i class="fa fa-envelope-o"></i> <a href="mailto:support@techxonia.com">support@techxonia.com</a></p>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        <div class="links">
+            <a href="privacy_policy.html">Privacy Policy</a>
+            <a href="term_and_conditions.html">Terms &amp; Conditions</a>
+        </div>
+        &copy; 2026 Techxonia, LLC — Multi-Profile Medical Records App. All rights reserved.
+    </footer>
+
+    <button id="to-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></button>
+
+    <script>
+        (function () {
+            var progress = document.getElementById('read-progress');
+            var toTop = document.getElementById('to-top');
+            var sections = Array.prototype.slice.call(document.querySelectorAll('.content .card'));
+            var tocLinks = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+
+            function onScroll() {
+                var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                var scrolled = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+                progress.style.width = scrolled + '%';
+                toTop.classList.toggle('show', window.scrollY > 400);
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        var id = entry.target.getAttribute('id');
+                        tocLinks.forEach(function (link) {
+                            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                        });
+                    }
+                });
+            }, { rootMargin: '-20% 0px -55% 0px', threshold: 0.05 });
+
+            sections.forEach(function (s) { io.observe(s); });
+
+            // Lenient reveal observer so every card (including the last) fades in.
+            var revealObserver = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+
+            sections.forEach(function (s) { revealObserver.observe(s); });
+
+            // Fallback: if IntersectionObserver is unsupported, show all cards.
+            if (!('IntersectionObserver' in window)) {
+                sections.forEach(function (s) { s.classList.add('visible'); });
+            }
+
+            toTop.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+    </script>
+
+</body>
+
+</html>
